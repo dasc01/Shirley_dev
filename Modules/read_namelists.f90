@@ -819,7 +819,9 @@ MODULE read_namelists_module
        CALL mp_bcast( scf_psolver,           ionode_id )
        CALL mp_bcast( eh_scf,                ionode_id )
        CALL mp_bcast( eg_min,                ionode_id )
+       CALL mp_bcast( e_excit,                ionode_id )
        CALL mp_bcast( nholes,                ionode_id )
+       CALL mp_bcast( ncorex,                ionode_id )
        !DASe
        CALL mp_bcast( one_atom_occupations,      ionode_id )
        CALL mp_bcast( spline_ps,                 ionode_id )

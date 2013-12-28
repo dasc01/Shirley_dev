@@ -28,7 +28,7 @@ SUBROUTINE weights()
   USE mp,                   ONLY : mp_bcast, mp_sum
   USE io_global,            ONLY : ionode, ionode_id
 !DASb
-  USE input_parameters,     ONLY : eh_scf, eg_min, nholes
+  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex
 !DASe
   !
   IMPLICIT NONE
@@ -39,6 +39,9 @@ SUBROUTINE weights()
     ! counter on spin polarizations
     ! counter on bands
   real (DP) demet_up, demet_dw
+  !DASb
+  real (DP)::netot
+  !DASe
   !
   demet         = 0.D0
   !
@@ -96,10 +99,15 @@ SUBROUTINE weights()
      ! ... calculate weights for the electron-hole case using smearing
      !
      if(eg_min .lt. 2*degauss) eg_min=2*degauss
-     CALL eh_weights( nks, wk, nbnd, nelec, nholes, eg_min, degauss, &
-          ngauss, et, ef, demet, wg, 0, isk)
+     netot = 0.0d0
+     CALL eh_weights( nks, wk, nbnd, nelec, nholes, ncorex, eg_min, e_excit, degauss, &
+          ngauss, et, ef, demet, netot, wg, 0, isk)
      !
      CALL mp_sum( demet, inter_pool_comm )
+     !
+     !
+     CALL mp_sum( netot, inter_pool_comm )
+     write(*,'(A,F12.6)') "netot=",netot
      !
 !DASe
   ELSE IF ( lgauss ) THEN
