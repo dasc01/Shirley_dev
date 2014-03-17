@@ -78,7 +78,7 @@
 !DASb
   integer :: becunit, b_nk, b_ik, b_iik, b_is, b_nkb, b_nbnd, b_ib, b_ikb
   integer :: b_iat, b_it, b_npra, b_ptr, ityp, b_ip
-  integer :: gw_nqp, gw_nspin, iqp
+  integer :: gw_nqp, gw_nspin, iqp, xasunit
   complex(dp),allocatable ::becp(:,:,:),b_ztmp(:,:)
   real (dp), allocatable ::gwqp(:,:,:)
   integer, allocatable::bkbs(:),ksindx(:,:)
@@ -207,6 +207,10 @@
 
 !DASb
 112 continue
+     if(  mypoolid==mypoolroot ) then
+        xasunit=freeunit()
+        write(*,*) "xasunit=",xasunit
+     endif
 !DASe
 
   ! MPI-IO
@@ -276,7 +280,7 @@
                eigval, neig_found, &
                MPI_DOUBLE_PRECISION, status, ierr )
           write(*,*) "offset, neig_found, ik=",offset, neig_found, ik
-          write(*,'(F12.8)') (eigval(b_ib)*rytoev,b_ib=1,neig_found)
+          write(xasunit,'(F12.8)') (eigval(b_ib)*rytoev,b_ib=1,neig_found)
        endif
     endif
 

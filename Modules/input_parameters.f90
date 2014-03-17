@@ -1233,7 +1233,7 @@ MODULE input_parameters
 !
 !    ATOMIC_SPECIES
 !
-        CHARACTER(len=3)  :: atom_label(nsx) = 'XX'   ! label of the atomic species being read
+        CHARACTER(len=4)  :: atom_label(nsx) = 'XX'   ! label of the atomic species being read
         CHARACTER(len=80) :: atom_pfile(nsx) = 'YY'   ! pseudopotential file name
         REAL(DP)          :: atom_mass(nsx)  = 0.0_DP ! atomic mass of the i-th atomic species
           ! in atomic mass units: 1 a.m.u. = 1822.9 a.u. = 1.6605 * 10^-27 kg

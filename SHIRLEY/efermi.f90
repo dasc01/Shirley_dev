@@ -3,7 +3,7 @@
 #include "f_defs.h"
   use parallel_include
   USE io_global,  ONLY : stdout, ionode, ionode_id
-  use mp_global, only : nproc, mpime, world_comm
+  use mp_global, only : nproc, mpime, world_comm, mp_global_end
   use mp, only : mp_bcast, mp_end, mp_barrier, mp_sum, mp_max, mp_min
   use fermi, only : fermifunc, fermideriv, fermi_energy_sub=>fermi_energy
   use mpio
@@ -240,6 +240,7 @@
   enddo
   call mpi_file_close( fheigval, ierr )
   call mp_barrier
+  call mp_global_end()  
   stop
 
   end program efermi
