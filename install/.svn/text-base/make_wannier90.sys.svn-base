@@ -1,0 +1,9 @@
+#=======================================
+# WANNIER90 	
+#=======================================
+
+F90=mpif90
+FCOPTS=$(FFLAGS) -nomodule 
+LDOPTS=-static-intel 
+
+LIBS = /opt/intel/mkl/10.0.5.025/lib/em64t/libmkl_lapack.a   -lmkl_intel_lp64  -lmkl_sequential -lmkl_core 

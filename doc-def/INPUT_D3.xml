@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="input_xx.xsl"?>
+<!-- FILE AUTOMATICALLY CREATED: DO NOT EDIT, CHANGES WILL BE LOST -->
+    
+<input_description distribution="Quantum Espresso" package="PWscf" program="d3.x" >
+   <toc>
+   </toc>
+   <namelist name="INPUTPH" >
+      <group>
+         <label> Variables that MUST BE SPECIFIED
+         </label>
+         <var name="fildrho" type="CHARACTER" >
+            <info>
+The file containing the variation of the charge
+density at the q point under consideration, this
+file is produced by phonon.
+            </info>
+            <default> &apos; &apos;
+            </default>
+         </var>
+         <var name="fild0rho" type="CHARACTER" >
+            <info>
+The file containing the variation of the charge
+density at q=0, this file is produced by phonon.
+            </info>
+            <default> &apos; &apos;
+            </default>
+         </var>
+         <dimension name="amass" start="1" end="ntyp" type="CHARACTER" >
+            <info>
+ionic masses [atomic mass units]
+            </info>
+         </dimension>
+      </group>
+      <var name="prefix" type="CHARACTER" >
+         <info> prefix for file names
+         </info>
+         <default> &apos;pwscf&apos;
+         </default>
+      </var>
+      <var name="outdir" type="CHARACTER" >
+         <info> scratch directory
+         </info>
+         <default> &apos;./&apos;
+         </default>
+      </var>
+      <var name="fildyn" type="CHARACTER" >
+         <info>
+The file where the derivative of the dynamical
+matrix will be written
+         </info>
+         <default> &apos;d3dyn&apos;
+         </default>
+      </var>
+      <var name="ethr_ph" type="REAL" >
+         <info>
+Threshold for iterative diagonalization
+(accuracy in ryd of the calculated eigenvalues).
+         </info>
+         <default> 1.0d-5
+         </default>
+      </var>
+      <dimension name="q0mode_todo" start="1" end="3*nat" type="INTEGER" >
+         <info>
+This array contains the list of the q=0 modes that
+will be computed. If q0mode_todo(1).eq.0 the
+program will compute every q=0 mode.
+         </info>
+         <status> q0mode_todo is statically allocated to dimension 300
+         </status>
+         <default> 0
+         </default>
+      </dimension>
+      <var name="wraux" type="LOGICAL" >
+         <info>
+If .true. the program will write different terms
+of the matrix on different files.
+         </info>
+         <default> .false.
+         </default>
+      </var>
+      <var name="recv" type="LOGICAL" >
+         <info> Specify .true. for a recover run.
+         </info>
+         <default> .false.
+         </default>
+      </var>
+      <var name="istop" type="INTEGER" >
+         <default> 0
+         </default>
+         <info>
+If this number is set different from zero the
+program will stop after the specified routine
+and will write the partial result in the recover
+file.
+         </info>
+      </var>
+      <var name="iverbosity" type="INTEGER" >
+         <default> 0
+         </default>
+         <info> type of printing ( 0 few, 1 all )
+         </info>
+      </var>
+   </namelist>
+</input_description>

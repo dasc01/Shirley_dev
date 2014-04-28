@@ -276,10 +276,10 @@
      enddo
     write(iunout,'(a,f12.5,a)') '# Applied a delta shift of ', delta/evtory, ' eV'
     do ispin=1, nspin
+       write(iunout,*) '#SPIN=',ispin
        do i=1,nener
           write(iunout,'(5e14.5e3)') ener(i)/evtory,spec(i,1:4,ispin)
        enddo
-       write(iunout,*) 
     enddo
     close(iunout)
   endif

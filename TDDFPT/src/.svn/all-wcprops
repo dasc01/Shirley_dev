@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src
+END
+lr_set_boxes_density.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_set_boxes_density.f90
+END
+lr_apply_liouvillian.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_apply_liouvillian.f90
+END
+lr_write_restart.f90
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_write_restart.f90
+END
+lr_readin.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_readin.f90
+END
+lr_dealloc.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_dealloc.f90
+END
+lr_init_nfo.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_init_nfo.f90
+END
+lr_read_wf.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_read_wf.f90
+END
+lr_variables.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_variables.f90
+END
+lr_lanczos.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_lanczos.f90
+END
+lr_read_d0psi.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_read_d0psi.f90
+END
+lr_sm1_psi.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_sm1_psi.f90
+END
+bcast_lr_input.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/bcast_lr_input.f90
+END
+lr_calc_dens.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_calc_dens.f90
+END
+lr_diagonalise.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_diagonalise.f90
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/Makefile
+END
+lr_restart.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_restart.f90
+END
+stop_lr.f90
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/stop_lr.f90
+END
+lr_dot.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_dot.f90
+END
+lr_dvpsi_e.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_dvpsi_e.f90
+END
+lr_dv_setup.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_dv_setup.f90
+END
+lr_normalise.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_normalise.f90
+END
+lr_cgsolve_all.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_cgsolve_all.f90
+END
+lr_ortho.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_ortho.f90
+END
+lr_solve_e.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_solve_e.f90
+END
+lr_ch_psi_all.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_ch_psi_all.f90
+END
+sd0psi.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/sd0psi.f90
+END
+print_clock_lr.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/print_clock_lr.f90
+END
+lr_charg_resp.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_charg_resp.f90
+END
+lr_alloc_init.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_alloc_init.f90
+END
+lr_setup_dgc.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_setup_dgc.f90
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/make.depend
+END
+lr_h_psiq.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_h_psiq.f90
+END
+lr_main.f90
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/src/lr_main.f90
+END

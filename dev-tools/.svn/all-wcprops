@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools
+END
+check_gui
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/check_gui
+END
+guihelp.xsl
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/guihelp.xsl
+END
+src-normal.py
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/src-normal.py
+END
+calltree.pl
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/calltree.pl
+END
+release.sh
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/release.sh
+END
+README.helpdoc
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/README.helpdoc
+END
+callhtml.pl
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/callhtml.pl
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/Makefile
+END
+helpdoc.schema
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/helpdoc.schema
+END
+src-normal
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/src-normal
+END
+helpdoc
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/helpdoc
+END
+update_gui_help
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/dev-tools/update_gui_help
+END

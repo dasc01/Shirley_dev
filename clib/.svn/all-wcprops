@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib
+END
+indici.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/indici.c
+END
+customize_signals.c
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/customize_signals.c
+END
+cptimer.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/cptimer.c
+END
+konst.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/konst.h
+END
+stack.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/stack.c
+END
+fftw.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/fftw.c
+END
+md5_from_file.c
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/md5_from_file.c
+END
+c_mkdir.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/c_mkdir.c
+END
+qsort.c
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/qsort.c
+END
+memstat.c
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/memstat.c
+END
+fftw.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/fftw.h
+END
+fft_stick.c
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/fft_stick.c
+END
+eval_infix.c
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/eval_infix.c
+END
+md5.c
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/md5.c
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/make.depend
+END
+md5.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/md5.h
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/clib/Makefile
+END

@@ -1,0 +1,338 @@
+  program jdos
+
+  ! compute lifetime/broadening due to el-ph coupling
+
+  ! David Prendergast, UCB, Feb 2007
+
+  ! now parallelized
+#include "f_defs.h"
+  use kinds, only : dp
+  use hamq_shirley, only : init_stdout, read_hamq, nbasis
+  use diag_shirley
+  use elph_shirley
+  USE io_global,  ONLY : stdout
+  use mp_global, only : nproc, mpime, root
+  use mp, only : mp_bcast, mp_barrier, mp_end, mp_sum
+
+  implicit none
+
+!  integer,parameter :: stdout=6
+  integer,parameter :: stdin =5
+  integer,parameter :: maxchar=255
+  REAL(DP), PARAMETER :: rytoev=13.6058d0
+  real(dp),parameter :: kelvin2rydberg = 6.3336303d-6
+  complex(dp),parameter :: zero=cmplx(0.d0,0.d0)
+  complex(dp),parameter :: one =cmplx(1.d0,0.d0)
+
+  character(len=3) :: nodenumber
+  character(maxchar) :: hamqfile
+  character(maxchar) :: elphfile
+  character(maxchar) :: outfile
+  character(maxchar) :: kpt_type
+  character(maxchar) :: fmtstr
+  integer :: nq
+  integer :: nqgrid(3), iqgrid(3)
+  real(dp),allocatable :: qvec(:,:), wq(:)
+  integer :: iqs
+  integer :: nqtot
+  integer,allocatable :: nq_local(:)
+  integer,allocatable :: iqs_local(:)
+  logical :: cartesian
+
+  real(dp),allocatable :: eigval_q(:)
+  complex(dp),allocatable :: eigvec_q(:,:)
+
+  integer :: iunhq, iunepm, iunout, ierr
+
+  real(dp) :: ef, nelecf, def
+  real(dp),allocatable :: wg(:,:)
+
+  real(dp) :: efermi=0.d0 ! eV
+  real(dp) :: eta = 0.1d0 ! eV
+  logical :: debug=.false.
+  real(dp) :: emax = 10.d0 ! eV max excitation energy
+
+  real(dp) :: de1, de2, phocc1, phocc2, bosefac, fermifac, omega, wm
+
+  type xcton_type
+    integer :: nx
+    real(dp),pointer :: ex(:)
+    integer,pointer :: ielec(:)
+    integer,pointer :: ihole(:)
+  end type
+
+  real(dp),allocatable :: ex(:)
+  type(xcton_type) :: xcton
+  integer :: nx, ielec, ihole, jelec, jhole, ifermi_q
+  real(dp) :: ehi
+  complex(dp) :: dxcton
+
+  integer :: nener
+  real(dp) :: de
+  real(dp),allocatable :: spec(:), ener(:)
+
+  real(dp) :: pi, invpi
+
+  integer,external :: freeunit
+
+  integer :: i,j,k
+  integer :: iq, ik, ipedv
+
+
+  namelist / input / hamqfile, nener, &
+                     efermi, eta, &
+                     outfile, debug, emax
+
+
+  ! constant pi
+  pi = acos(-1.d0)
+  invpi = 1.d0 / pi
+
+  ! initialize mpi
+  CALL start_shirley (nodenumber) 
+
+  write(stdout,*) ' shirley_efermi'
+  write(stdout,*)
+
+  if( mpime==root ) then
+
+    read(stdin,nml=input,iostat=ierr)
+    if( ierr /= 0 ) &
+      call errore('shirley_qdiagp','problem reading namelist &input',101)
+
+    ! conversion to internal units
+    efermi = efermi /rytoev
+    emax = emax /rytoev
+    eta = eta / rytoev
+
+    read(stdin,*) kpt_type ! type of coordinates
+    kpt_type = adjustl(kpt_type)
+
+    cartesian = .false.
+    if( trim(kpt_type) == 'tpiba' .or. trim(kpt_type) == 'crystal' ) then
+      read(stdin,*) nq
+      allocate( qvec(3,nq), wq(nq) )
+      do iq=1,nq
+        read(stdin,*) qvec(1:3,iq), wq(iq)
+      enddo
+      if( trim(kpt_type) == 'tpiba' ) cartesian = .true.
+    else if( trim(kpt_type) == 'automatic' ) then
+      read(stdin,*) nqgrid, iqgrid
+      if( any(iqgrid > 1) .or. any(iqgrid < 0) ) &
+        call errore('shirley_qdiagp','grid shift values should be 0 or 1',201)
+      if( any(nqgrid < 1) ) &
+        call errore('shirley_qdiagp','grid values should be positive',202)
+      nq = product(nqgrid)
+      allocate( qvec(3,nq), wq(nq) )
+      nq=0
+      do i=1,nqgrid(1)
+        do j=1,nqgrid(2)
+          do k=1,nqgrid(3)
+            nq=nq+1
+            !  xk are the components of the complete grid in crystal axis
+            qvec(1,nq) = DBLE(i-1)/nqgrid(1) - DBLE(iqgrid(1))/2/nqgrid(1)
+            qvec(2,nq) = DBLE(j-1)/nqgrid(2) - DBLE(iqgrid(2))/2/nqgrid(2)
+            qvec(3,nq) = DBLE(k-1)/nqgrid(3) - DBLE(iqgrid(3))/2/nqgrid(3)
+          enddo
+        enddo
+      enddo
+      wq = 2.d0/dble(nq)
+    else
+      write(stdout,*) ' kpoints flag unrecognized'
+      write(stdout,*) ' should be: tpiba, crystal, or automatic'
+      call errore('shirley_qdiagp','stopping',1)
+    endif
+ 
+    ! now divide k-point set over processors
+    nqtot = nq
+    allocate( nq_local(nproc), iqs_local(nproc) )
+    nq_local = nqtot / nproc
+    do i=1,nqtot-nq_local(nproc)*nproc
+      nq_local(i)=nq_local(i)+1
+    enddo
+
+    iqs_local(1)=0
+    do i=2,nproc
+      iqs_local(i)=iqs_local(i-1)+nq_local(i-1)
+    enddo
+
+  else  ! mpime==root
+
+    allocate( nq_local(nproc), iqs_local(nproc) )
+
+  endif ! mpime==root
+
+  ! broadcast namelist input first
+  call mp_bcast( hamqfile, root )
+  call mp_bcast( debug, root )
+  call mp_bcast( efermi, root )
+  call mp_bcast( emax, root )
+  call mp_bcast( eta, root )
+  call mp_bcast( nener, root )
+
+  ! broadcast k-point stuff next
+  call mp_bcast( nqtot, root )
+  call mp_bcast( cartesian, root )
+  if( mpime/=root ) allocate( qvec(3,nqtot), wq(nqtot) )
+  call mp_bcast( nq_local, root )
+  call mp_bcast( iqs_local, root )
+  call mp_bcast( qvec, root )
+  call mp_bcast( wq, root )
+  nq = nq_local(mpime+1)
+  iqs = iqs_local(mpime+1)
+  
+! debugging
+  if( debug .and. mpime/=root ) stdout = 500+mpime
+
+  write(stdout,*) ' # q-points         = ', nqtot
+  write(stdout,*) ' # q-points locally = ', nq, ':', iqs+1, ' to ', iqs+nq
+
+
+  if( mpime==root ) then
+    iunhq = freeunit()
+    open(iunhq,file=trim(hamqfile),form='unformatted',iostat=ierr)
+    if( ierr /= 0 ) call errore('shirley_qdiagp','problem opening file '//trim(hamqfile),102)
+
+    iunout = freeunit()
+    open(iunout,file=trim(outfile),form='formatted',iostat=ierr)
+    if( ierr /= 0 ) call errore('shirley_qdiagp','problem opening file '//trim(outfile),102)
+
+  endif
+
+! initialize stdout in hamq_shirley
+  call init_stdout( stdout )
+
+  write(stdout,*) ' reading hamiltonian ...'
+  call read_hamq( iunhq )
+  write(stdout,*) ' ... done'
+
+  allocate( ener(nener), spec(nener) )
+  spec=0.d0
+  de = emax/dble(nener)
+  do i=1,nener
+    ener(i) = dble(i-1)*de
+  enddo
+  write(stdout,*) nener, de
+
+! ======================================================================
+! now do something
+! ======================================================================
+
+  write(stdout,*) ' about to allocate eigenspace: ', nbasis
+  call flush_unit(stdout)
+  allocate( eigvec_q(nbasis,nbasis), eigval_q(nbasis), stat=ierr )
+  write(fmtstr,'(a,i,a)') '(i,3e,',nbasis,'e)'
+
+  ! find Hamiltonian solutions first
+  eigval_q = 0.d0
+  eigvec_q = zero
+  do iq=iqs+1,iqs+nq
+    write(stdout,*) ' diag_hamq for q-point ', iq-iqs, ' of ', nq
+    call diag_hamq( qvec(:,iq), eigval_q(:), eigvec_q(:,:), cartesian )
+
+  ! gather exciton info
+    ! position of VBM
+    do i=1,nbasis
+      if( eigval_q(i) > efermi ) exit
+    enddo
+    ifermi_q = i-1
+    
+    ! number of excitons
+    nx=0
+    do ihole=ifermi_q,1,-1
+    do ielec=ifermi_q+1,nbasis,1
+      ehi = eigval_q(ielec)-eigval_q(ihole)
+      if( ehi > emax ) cycle 
+      nx = nx + 1
+    enddo
+    enddo
+
+    allocate( ex(nx) )
+
+    ! excitons energies and single-particle pairs
+    nx=0
+    do ihole=ifermi_q,1,-1
+    do ielec=ifermi_q+1,nbasis,1
+      ehi = eigval_q(ielec)-eigval_q(ihole)
+      if( ehi > emax ) cycle 
+      nx = nx + 1
+      ex(nx) = ehi
+    enddo
+    enddo
+
+    write(stdout,*) ' accumulate spectrum for q-point ', iq-iqs, ' of ', nq
+    do i=1,nx
+      call add_gauss( nener, ener, ex(i), eta, spec )
+    enddo
+
+    deallocate( ex )
+
+  enddo
+  spec = spec * 2.d0 / dble(nqtot)
+  call mp_sum( spec )
+
+  if( mpime==root ) then
+  write(stdout,*) ' now dump to ', trim(outfile)
+  do i=1,nener
+    write(iunout,*) ener(i)*rytoev,spec(i)
+  enddo
+  endif
+
+
+  ! deallocate
+  deallocate( qvec, wq )
+  deallocate( nq_local, iqs_local )
+  deallocate( eigvec_q, eigval_q )
+
+
+  999 write(stdout,*) ' end shirley_qdiag'
+  call mp_barrier
+  call mp_end
+  stop
+  
+  contains
+
+    subroutine add_gauss( nener, ener, e, sigma, spec )
+
+    integer :: nener
+    real(dp) :: ener(nener), e, sigma, spec(nener)
+
+    real(dp) :: its2, pre
+    real(dp) :: arg(nener)
+
+    its2=2.d0*sigma*sigma
+    pre=1.d0/sqrt(acos(-1.d0)*its2)
+    its2 = 1.d0/its2
+    arg = ener - e
+    arg = arg ** 2.d0
+    arg = - arg * its2
+    spec = spec + pre * exp( arg )
+     
+    end subroutine add_gauss
+
+    pure function fermifunc( e, ef, kT )
+    real(dp),intent(in) :: e, ef, kT
+    real(dp) :: fermifunc
+
+    fermifunc = 1.d0 / ( exp( (e-ef)/kT ) + 1 )
+    end function fermifunc
+
+    pure function bosefunc( e, kT )
+    real(dp),intent(in) :: e, kT
+    real(dp) :: bosefunc
+
+    bosefunc = 1.d0 / ( exp( e/kT ) - 1 )
+    end function bosefunc
+
+    pure function deltafunc( e, eta )
+    ! actually a lorentzian
+    real(dp) deltafunc
+    real(dp),intent(in) :: e, eta
+    real(dp) :: df
+
+    df = eta*0.5d0
+    df = df / ( df*df + e*e )
+    deltafunc = invpi * df
+    end function deltafunc
+
+  end program jdos

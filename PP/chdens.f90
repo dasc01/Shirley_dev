@@ -291,6 +291,11 @@ SUBROUTINE chdens (filplot,plot_num)
      !
      rhor (:) = rhor (:) + weight (ifile) * rhos (:)
   ENDDO
+!DASb write the quantity in native format
+     CALL plot_io ('delta.dat', title, nr1sxa, nr2sxa, nr3sxa, &
+          nr1sa, nr2sa, nr3sa, nats, ntyps, ibravs, celldms, ats, gcutmsa, &
+          duals, ecuts, 1, atms, ityps, zvs, taus, rhor, + 1)
+!DASe
   DEALLOCATE (ityps)
   DEALLOCATE (taus)
   DEALLOCATE (rhos)

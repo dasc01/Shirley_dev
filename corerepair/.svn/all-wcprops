@@ -1,0 +1,101 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair
+END
+momentum_matrix.f90
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/momentum_matrix.f90
+END
+position_matrix.f90
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/position_matrix.f90
+END
+valence_corerepair.f90
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/valence_corerepair.f90
+END
+upf.f90
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/upf.f90
+END
+intradialprod.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/intradialprod.f90
+END
+fhi2valence.pl
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/fhi2valence.pl
+END
+pointers.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/pointers.f90
+END
+fhi_getwave.pl
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/fhi_getwave.pl
+END
+fileio.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/fileio.f90
+END
+addlocalproj_upf.f90
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/addlocalproj_upf.f90
+END
+corevalence_position.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/corevalence_position.f90
+END
+splines.f90
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/splines.f90
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/make.depend
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/Makefile
+END
+atomic_waves.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/atomic_waves.f90
+END
+renormalize_ae_from_ps.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/corerepair/renormalize_ae_from_ps.f90
+END

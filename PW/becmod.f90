@@ -36,6 +36,10 @@ MODULE becmod
 #endif
   !
   TYPE (bec_type) :: becp  ! <beta|psi>
+!  TYPE (bec_type), allocatable :: becp_gl(:) !the index is over k-points
+  REAL(DP), allocatable :: becp_g_gl(:,:,:)
+  COMPLEX(DP), allocatable :: becp_k_gl(:,:,:)
+  COMPLEX(DP), allocatable :: becp_nc_gl(:,:,:,:)
   PRIVATE
 
   REAL(DP), ALLOCATABLE :: &
@@ -66,7 +70,7 @@ MODULE becmod
   INTEGER,SAVE::becunit
   !DASe
   PUBLIC :: bec_type, becp, allocate_bec_type, deallocate_bec_type, calbec, &
-            beccopy, becscal, dump_becp, becunit
+            beccopy, becscal, dump_becp, becunit, becp_g_gl, becp_k_gl, becp_nc_gl
   !
 CONTAINS
   !-----------------------------------------------------------------------
@@ -399,7 +403,7 @@ CONTAINS
   END SUBROUTINE DUMP_BECP_TYPE
 !--------------------------------------
   subroutine dump_becp_gamma(betapsi,ik,is)
-    USE mp_global, ONLY : mpime, root
+    USE mp_global, ONLY : me_pool, root_pool
     USE mp, ONLY: mp_rank
     USE io_files, ONLY:find_free_unit
     implicit none
@@ -408,7 +412,7 @@ CONTAINS
     INTEGER, INTENT (in) :: ik, is
     nkb=size(betapsi, 1)
     nbnd=size(betapsi, 2)
-    if(mpime==root) then
+    if(me_pool==root_pool) then
        write(becunit,'(4I12)') ik, is, nkb, nbnd
        do ib=1, nbnd
           write(becunit,'(2F18.14)') (CMPLX(betapsi(ikb,ib)),ikb=1,nkb)
@@ -425,7 +429,7 @@ CONTAINS
   end subroutine dump_becp_nc
 !--------------------------------------
   subroutine dump_becp_k(betapsi,ik,is)
-    USE mp_global, ONLY : mpime, root
+    USE mp_global, ONLY : me_pool, root_pool
     USE mp, ONLY: mp_rank
     USE io_files, ONLY:find_free_unit
     implicit none
@@ -434,7 +438,7 @@ CONTAINS
     INTEGER, INTENT (in) :: ik, is
     nkb=size(betapsi, 1)
     nbnd=size(betapsi, 2)
-    if(mpime==root) then
+    if(me_pool==root_pool) then
 !       iunit=find_free_unit()
 !       open(iunit,file='becp.dmp',form='formatted',status='append')
        write(becunit,'(4I12)') ik, is, nkb, nbnd

@@ -30,7 +30,7 @@ SUBROUTINE potinit()
   USE basis,                ONLY : starting_pot
   USE klist,                ONLY : nelec
   USE lsda_mod,             ONLY : lsda, nspin
-  USE fft_base,             ONLY : dfftp
+  USE fft_base,             ONLY : dfftp, grid_scatter !DASb
   USE fft_interfaces,       ONLY : fwfft
   USE gvect,                ONLY : ngm, gstart, nl, g, gg
   USE gvecs,              ONLY : doublegrid
@@ -38,7 +38,7 @@ SUBROUTINE potinit()
   USE scf,                  ONLY : rho, rho_core, rhog_core, &
                                    vltot, v, vrs, kedtau, & 
                                    dna, vna, drhoa, dvna, &
-                                   create_scf_type, scf_type_COPY
+                                   create_scf_type, scf_type_COPY, vext !DASb
   USE funct,                ONLY : dft_is_meta
   USE wavefunctions_module, ONLY : psic
   USE ener,                 ONLY : ehart, etxc, vtxc, epaw, ehh
@@ -58,6 +58,10 @@ SUBROUTINE potinit()
   USE paw_variables,        ONLY : okpaw, ddd_PAW
   USE paw_init,             ONLY : PAW_atomic_becsum
   USE paw_onecenter,        ONLY : PAW_potential
+!DASb
+  USE grid_dimensions,      ONLY : nrxx
+  USE input_parameters,     ONLY : read_extpot
+!DASe
   !
   IMPLICIT NONE
   !
@@ -68,6 +72,10 @@ SUBROUTINE potinit()
   LOGICAL               :: exst 
   CHARACTER(LEN=256)    :: filename
   !
+  !DASb
+  REAL(DP), ALLOCATABLE :: vaux(:)
+  CHARACTER(LEN=256)    :: filpot
+  !DASe
   CALL start_clock('potinit')
   !
   ! check for both .dat and .xml extensions (compatibility reasons) 
@@ -227,7 +235,16 @@ SUBROUTINE potinit()
      !
   end if
   !
-  
+  !DASb
+  !read external potential from file
+  if(read_extpot) then
+     if(.not. allocated(vext)) allocate(vext(nrxx))
+     if(.not. allocated(vaux)) allocate(vaux(dfftp%nr1x *  dfftp%nr2x *  dfftp%nr3x))
+     if(ionode) CALL read_extra_pot("delta.dat", vaux)
+     CALL grid_scatter( vaux, vext )
+     if(allocated(vaux)) deallocate(vaux)
+  endif
+  !DASe
   !
   !
   ! ... compute the potential and store it in vr
@@ -261,3 +278,33 @@ SUBROUTINE potinit()
   RETURN
   !
 END SUBROUTINE potinit
+!DASb
+!----------------------------------------------------------------------------
+  SUBROUTINE read_extra_pot(filpot, vext)
+!----------------------------------------------------------------------------
+  USE kinds,      ONLY : DP
+  USE parameters, ONLY : ntypx
+  USE fft_base,   ONLY : dfftp
+  USE ions_base,  ONLY : nat
+  CHARACTER (LEN=25), INTENT(IN) :: filpot
+  REAL(DP) :: vext(*)
+  CHARACTER (LEN=25) :: title
+  INTEGER :: plot_num=0, iflag=+1
+  real(DP) :: celldms (6), gcutmsa, duals, zvs(ntypx), ats(3,3), ecuts
+  real(DP), ALLOCATABLE :: taus (:,:)
+  INTEGER :: ibravs, nr1sxa, nr2sxa, nr3sxa, nr1sa, nr2sa, nr3sa, &
+       ntyps, nats, idum
+  INTEGER, ALLOCATABLE :: ityps (:)
+  CHARACTER (len=3) :: atms(ntypx)
+
+  ALLOCATE  (taus( 3 , nat))
+  ALLOCATE  (ityps( nat))
+
+  CALL plot_io (filpot, title, nr1sxa, nr2sxa, nr3sxa, &
+          nr1sa, nr2sa, nr3sa, nats, ntyps, ibravs, celldms, ats, gcutmsa, &
+          duals, ecuts, idum, atms, ityps, zvs, taus, vext, - 1)
+
+  RETURN
+  END SUBROUTINE read_extra_pot
+!----------------------------------------------------------------------------
+!DASe

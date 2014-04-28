@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="input_xx.xsl"?>
+<!-- FILE AUTOMATICALLY CREATED: DO NOT EDIT, CHANGES WILL BE LOST -->
+    
+<input_description distribution="Quantum Espresso" program="gipaw.x" >
+   <toc>
+   </toc>
+   <intro>
+Structure of the input data:
+============================
+
+   &amp;INPUTGIPAW
+     ...
+   /
+   </intro>
+   <namelist name="INPUTGIPAW" >
+      <var name="job" type="CHARACTER" >
+         <default> &apos;nmr&apos;
+         </default>
+         <info>
+select calculation to perform. The possible values are:
+
+&apos;f-sum&apos;        check the f-sum rule
+&apos;nmr&apos;          compute the magnetic suscept. and NMR chemical shifts
+&apos;g_tensor&apos;     compute the EPR g-tensor
+&apos;efg&apos;          compute the electric field gradients at the nuclei
+         </info>
+      </var>
+      <var name="prefix" type="CHARACTER" >
+         <default> &apos;prefix&apos;
+         </default>
+         <info>
+prefix of files saved by program pw.x
+         </info>
+      </var>
+      <var name="tmp_dir" type="CHARACTER" >
+         <default> &apos;./scratch/&apos;
+         </default>
+         <info>
+temporary directory where pw.x files resides
+         </info>
+      </var>
+      <var name="conv_threshold" type="REAL" >
+         <default> 1.d-14
+         </default>
+         <info>
+convergence threshold for the diagonalization and for the Green&apos;s
+function solver
+         </info>
+      </var>
+      <var name="isolve" type="INTEGER" >
+         <default> 0
+         </default>
+         <info>
+diagonalization method:
+
+   0 = Davidson
+   1 = CG
+         </info>
+      </var>
+      <var name="q_gipaw" type="REAL" >
+         <default> 0.01
+         </default>
+         <info>
+small vector for long wavelength linear response
+         </info>
+      </var>
+      <var name="iverbosity" type="INTEGER" >
+         <default> 0
+         </default>
+         <info>
+if iverbosity &gt; 0 print more information in output
+         </info>
+      </var>
+      <var name="filcurr" type="CHARACTER" >
+         <default> &apos;&apos;
+         </default>
+         <info>
+for saving the induced current (valence only)
+         </info>
+      </var>
+      <var name="filfield" type="CHARACTER" >
+         <default> &apos;&apos;
+         </default>
+         <info>
+for saving the induced magnetic field (valence only)
+         </info>
+      </var>
+      <var name="read_recon_in_paratec_fmt" type="LOGICAL" >
+         <default> .FALSE.
+         </default>
+         <info>
+for reading reconstruction data from Paratec converted
+pseudopotentials
+         </info>
+      </var>
+      <dimension name="file_reconstruction" start="1" end="ntyp" type="CHARACTER" >
+         <info>
+for each pseudopotential, the file name with reconstruction data
+         </info>
+      </dimension>
+      <var name="use_nmr_macroscopic_shape" type="LOGICAL" >
+         <info>
+correct the chemical shift by taking into account the macroscopic
+shape of the sample
+         </info>
+      </var>
+      <var name="nmr_macroscopic_shape(3,3)" type="REAL" >
+         <default> 2/3
+         </default>
+         <info>
+tensor for the macroscopic shape correction
+         </info>
+      </var>
+      <var name="spline_ps" type="LOGICAL" >
+         <default> .TRUE.
+         </default>
+         <info>
+interpolate pseudopotentials with cubic splines (better accuracy
+of the chemical shifts)
+         </info>
+      </var>
+   </namelist>
+</input_description>

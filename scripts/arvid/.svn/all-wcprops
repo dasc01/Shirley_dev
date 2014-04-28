@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid
+END
+XASAnalyse.sh
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XASAnalyse.sh
+END
+XAS-md.sh
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XAS-md.sh
+END
+Relax.sh
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/Relax.sh
+END
+XAS.sh
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XAS.sh
+END
+AveSpectra.sh
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/AveSpectra.sh
+END
+XAS-xyz-ref.sh
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/418/branches/shirley_QE4.3_das/scripts/arvid/XAS-xyz-ref.sh
+END
+MD.sh
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/MD.sh
+END
+XASAnalyse-xyz.sh
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/418/branches/shirley_QE4.3_das/scripts/arvid/XASAnalyse-xyz.sh
+END
+XAS-NERSC.sh
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XAS-NERSC.sh
+END
+XAS-xyz.sh
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/418/branches/shirley_QE4.3_das/scripts/arvid/XAS-xyz.sh
+END
+xyz2inp.sh
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/418/branches/shirley_QE4.3_das/scripts/arvid/xyz2inp.sh
+END
+XAS-relax.sh
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XAS-relax.sh
+END
+Input_Block.in
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/Input_Block.in
+END
+XAS-ref.sh
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/scripts/arvid/XAS-ref.sh
+END

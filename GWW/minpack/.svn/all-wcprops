@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack
+END
+lmdif.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/lmdif.f
+END
+qrfac.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/qrfac.f
+END
+mlegzo.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/mlegzo.f
+END
+lmder.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/lmder.f
+END
+lmpar.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/lmpar.f
+END
+lmdif1.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/lmdif1.f
+END
+test.f
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/test.f
+END
+enorm.f
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/enorm.f
+END
+dpmpar.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/dpmpar.f
+END
+lmder1.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/lmder1.f
+END
+qrsolv.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/qrsolv.f
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/make.depend
+END
+mlagzo.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/mlagzo.f
+END
+fdjac2.f
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/fdjac2.f
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/minpack/Makefile
+END

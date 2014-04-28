@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include
+END
+defs.h.README
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/defs.h.README
+END
+fft_defs.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/fft_defs.h
+END
+opt_param.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/opt_param.h
+END
+c_defs.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/c_defs.h
+END
+fft_defs.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/fft_defs.h.in
+END
+f_defs.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/f_defs.h
+END
+c_defs.h.in
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/include/c_defs.h.in
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install
+END
+make_lapack.inc
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/make_lapack.inc
+END
+iotk_config.h
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/iotk_config.h
+END
+Makefile_iotk
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/Makefile_iotk
+END
+make_lapack.inc.in
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/make_lapack.inc.in
+END
+make_blas.inc
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/make_blas.inc
+END
+Makefile_lapack_testing_lin
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/Makefile_lapack_testing_lin
+END
+Makefile_lapack
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/Makefile_lapack
+END
+make_blas.inc.in
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/extlibs/install/make_blas.inc.in
+END

@@ -44,7 +44,8 @@ subroutine plot_io (filplot, title, nr1x, nr2x, nr3x, nr1, nr2, &
      open (unit = iunplot, file = filplot, form = 'formatted', &
           status = 'unknown', err = 100, iostat = ios)
   else
-     WRITE( stdout, '(5x,"Reading data from file  ",a)') TRIM(filplot)
+     !WRITE( stdout, '(5x,"Reading data from file  ",a)') TRIM(filplot)
+     !WRITE( stdout, '(a)')
      open (unit = iunplot, file = filplot, form = 'formatted', &
           status = 'old', err = 100, iostat = ios)
   endif

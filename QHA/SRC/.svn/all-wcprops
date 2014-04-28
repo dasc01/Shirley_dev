@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC
+END
+Partial_phonon_DOS.f90
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/Partial_phonon_DOS.f90
+END
+Mean_square_displacement.f90
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/Mean_square_displacement.f90
+END
+Ghost_DOS.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/Ghost_DOS.f90
+END
+Atom_projected_properties.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/Atom_projected_properties.f90
+END
+atom_info.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/atom_info.f90
+END
+F_QHA.f90
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/F_QHA.f90
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/QHA/SRC/Makefile
+END

@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww
+END
+start_end.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/start_end.f90
+END
+go_green.f90
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/go_green.f90
+END
+fit_polynomial.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/fit_polynomial.f90
+END
+self_energy_storage.f90
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/self_energy_storage.f90
+END
+create_quasi_particle.f90
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/create_quasi_particle.f90
+END
+input_gw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/input_gw.f90
+END
+vcprim.f90
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/vcprim.f90
+END
+gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/gww.f90
+END
+expansion.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/expansion.f90
+END
+go_fft.f90
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/go_fft.f90
+END
+green_function.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/green_function.f90
+END
+polarization.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/polarization.f90
+END
+times_gw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/times_gw.f90
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/Makefile
+END
+basic_structures.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/basic_structures.f90
+END
+self_energy_storage_OLD.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/self_energy_storage_OLD.f90
+END
+energies_gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/energies_gww.f90
+END
+compact_product.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/compact_product.f90
+END
+gv_time.f90
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/gv_time.f90
+END
+go_polarization.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/go_polarization.f90
+END
+self_energy.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/self_energy.f90
+END
+go_dressed_w.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/go_dressed_w.f90
+END
+remainder.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/remainder.f90
+END
+gww_fit.f90
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/gww_fit.f90
+END
+para_gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/para_gww.f90
+END
+go_exchange.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/go_exchange.f90
+END
+read_data_pw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/read_data_pw.f90
+END
+fft_gw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/fft_gw.f90
+END
+fit_multipole.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/fit_multipole.f90
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/make.depend
+END
+create_hf.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/gww/create_hf.f90
+END

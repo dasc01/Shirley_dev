@@ -104,7 +104,9 @@ subroutine eh_weights (nks, wk, nbnd, nelec, nholes, ncorex, eg_min, e_excit, de
      if(excit) then
         kwgt=kwgt+wk (kpoint)
         do ibnd = lumo(kpoint), nbnd
-           dwg(ibnd, kpoint)= wk (kpoint) * gaus(et(ibnd,kpoint)-(efvb+e_excit), max(degauss*2.0d0,0.0019))
+!!$           write(*,'(A,3F12.7)') 'et(ibnd,kpoint),(efvb+e_excit),diff=',&
+!!$                &et(ibnd,kpoint)*13.6056925,(efvb+e_excit)*13.6056925,(et(ibnd,kpoint)-(efvb+e_excit))*13.6056925
+           dwg(ibnd, kpoint)= wk (kpoint) * gaus(et(ibnd,kpoint)-(efvb+e_excit), max(degauss*2.0d0,0.073498648))
            temp_tot=temp_tot+dwg(ibnd, kpoint)
         enddo
      endif

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/Examples/tools
+END
+check_tddfpt.tcl
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/Examples/tools/check_tddfpt.tcl
+END
+check_pw.tcl
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/Examples/tools/check_pw.tcl
+END
+create_projection.sh
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/TDDFPT/Examples/tools/create_projection.sh
+END

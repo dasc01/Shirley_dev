@@ -1,0 +1,17 @@
+David Prendergast, UCB, Dec 2006
+
+This directory contains files used to generate the Shirley interpolation
+for electronic wave functions throughout the Brillouin zone.
+
+1. shirley_basis.x
+
+Generates the optimal basis set to span the Brillouin zone derived from
+a set of Bloch functions on some grid in k-space.
+
+2. shirley_ham.x
+
+Generates the q-dependent Hamiltonian matrix elements in the optimal basis set
+Expands the Hamiltonian in kinetic, local and non-local potential components.
+The local potential is constant wrt q, the kinetic energy is quadratic, and
+the non-local potential is fit using B-splines over a uniform grid in k-space.
+

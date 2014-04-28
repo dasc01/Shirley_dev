@@ -1,0 +1,245 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww
+END
+wfc_real.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wfc_real.f90
+END
+write_vpot_matrix.f90
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/write_vpot_matrix.f90
+END
+distance_gw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/distance_gw.f90
+END
+ultra_external.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/ultra_external.f90
+END
+set_wannier_P.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/set_wannier_P.f90
+END
+ultralocalization.f90
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/ultralocalization.f90
+END
+write_wannier_products.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/write_wannier_products.f90
+END
+wannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier.f90
+END
+write_wannier_matrix_c.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/write_wannier_matrix_c.f90
+END
+wannier_uterms_c.f90
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier_uterms_c.f90
+END
+memory_limit.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/memory_limit.f90
+END
+allocate_wannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/allocate_wannier.f90
+END
+product_wannier_para_c.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/product_wannier_para_c.f90
+END
+cprim.f90
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/cprim.f90
+END
+local_wannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/local_wannier.f90
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/Makefile
+END
+rotate_wannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/rotate_wannier.f90
+END
+real_wfc.f90
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/real_wfc.f90
+END
+stop_pp.f90
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/stop_pp.f90
+END
+energies_u.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/energies_u.f90
+END
+produce_wannier_gamma.f90
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/produce_wannier_gamma.f90
+END
+go_wannier_product.f90
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/go_wannier_product.f90
+END
+matrix_wannier_gamma.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/matrix_wannier_gamma.f90
+END
+energies_xc.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/energies_xc.f90
+END
+pw4gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/pw4gww.f90
+END
+wannier_gw.f90
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier_gw.f90
+END
+write_wannier_matrix.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/write_wannier_matrix.f90
+END
+wannier_uterms.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier_uterms.f90
+END
+dirdel.f90
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/dirdel.f90
+END
+product_wannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/product_wannier.f90
+END
+ultralocalization_para.f90
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/ultralocalization_para.f90
+END
+gram_schmidt_pwannier.f90
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/gram_schmidt_pwannier.f90
+END
+product_wannier_para.f90
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/product_wannier_para.f90
+END
+wannier_pmat_terms_ggrid.f90
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier_pmat_terms_ggrid.f90
+END
+wannier_valence_terms.f90
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/wannier_valence_terms.f90
+END
+openfil_pw4gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/openfil_pw4gww.f90
+END
+start_pw4gww.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/start_pw4gww.f90
+END
+make.depend
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/make.depend
+END
+dft_exchange.f90
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/dft_exchange.f90
+END
+calculate_wing.f90
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/GWW/pw4gww/calculate_wing.f90
+END

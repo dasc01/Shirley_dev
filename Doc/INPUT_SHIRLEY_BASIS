@@ -1,0 +1,62 @@
+shirley_basis.x input deck
+
+&input
+
+prefix : character(255)
+         the file prefix for input and output files
+         default = 'pwscf'
+
+outdir : character(255)
+         the directory for dumping output files like wave functions etc
+         default = './'
+
+trace_tol : real(dp)
+            when deciding which subspace of the optimal basis set to use
+            the eigenvectors of the negative overlap-squared (density matrix) 
+            are arranged in increasing order of their eigenvalues.
+            Those with the lowest eigenvalues span the space the most, 
+            those with the highest eigenvalues (closest in magnitude
+            to zero) have a lot of linear dependence.
+            trace_tol is used to establish which fraction of the trace -
+            the (ordered) sum of the eigenvalues - is to be sacrificed.
+            To retain 99.9% of the trace use trace_tol = 0.001
+            Negative values mean that no truncation is employed (default)
+            default = -1.d0
+
+ndim : integer,dimension(3)
+       specifies the dimensionality of the system (or at least the Brillouin
+       zone to be interpolated over). Each value must be 0 or 1.
+       A value of 1 implies that this dimension is turned on (exists)
+       For example a 1D wire with the infinite dimension along the third
+       reciprocal lattice vector would require:
+         ndim(1)=0, ndim(2)=0, ndim(3)=1
+       default = (/ 1, 1, 1 /)
+
+band_subset : integer,dimension(2)
+              specifies a subset of the input bands to be used in generating
+              the optimal basis set. Values can range from 1 to nbnd.
+              A value of 0 in each case results in 1 for the first index
+              and nbnd for the second index
+              default = (/ 0, 0 /)
+
+expand : logical
+         if .true. maps the original input k-points to all k in the 
+         non-negative Brillouin zone: [0,1]^3.
+         Note that I am including the zone boundary at 1 aswell.
+         For example, including translation alone, the Gamma-point will
+         be mapped to itself (000) as well as (001), (010), (011), (100), 
+         (101), (110), (111).
+         In combination with ndim, the number of mappings may be reduced.
+         For example with ndim = (/ 0,0,1 /), the Gamma-point is mapped to
+         just (000) and (001) in this 1D periodic case.
+         This option is developmental.
+         It does not include symmetry beyond translational.
+         It should be modified in the future to include inversion symmetry
+         and rotation.
+         default = .true.
+
+debug : logical
+        if .true. then generate extra output for debugging
+        default = .false.
+
+/

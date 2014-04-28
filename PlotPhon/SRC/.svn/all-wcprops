@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC
+END
+K_for_bands.f90
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC/K_for_bands.f90
+END
+make.inc
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC/make.inc
+END
+E_min_max.f90
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC/E_min_max.f90
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC/Makefile
+END
+Bands_to_gnuplot.f90
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/PlotPhon/SRC/Bands_to_gnuplot.f90
+END

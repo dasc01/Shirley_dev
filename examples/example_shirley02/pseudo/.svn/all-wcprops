@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley02/pseudo
+END
+au.cpi.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley02/pseudo/au.cpi.UPF
+END
+au_momrep.atmx
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley02/pseudo/au_momrep.atmx
+END
+au.cpi+local.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley02/pseudo/au.cpi+local.UPF
+END

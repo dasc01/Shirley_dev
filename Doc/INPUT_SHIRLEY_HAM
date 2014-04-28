@@ -1,0 +1,116 @@
+shirley_basis.x input deck
+
+&input
+
+prefix : character(255)
+         the file prefix for input and output files
+         default = 'pwscf'
+
+outdir : character(255)
+         the directory for dumping output files like wave functions etc
+         default = './'
+
+band_subset : integer,dimension(2)
+              specifies a subset of the input bands to be used in generating
+              the optimal basis set. Values can range from 1 to nbnd.
+              A value of 0 in each case results in 1 for the first index
+              and nbnd for the second index
+              default = (/ 0, 0 /)
+
+ksplord : integer,dimension(3)
+          k-point spline order for spline interpolation of the non-local
+          pseudopotential (or at least each Kleinman-Bylander projector).
+          Splining is carried out using 3D Bsplines and the de Boor
+          not-a-knot sequence whereby no specification of the end-point
+          derivatives is required (instead continuity of the second deriv
+          is assumed at the second and second last points).
+          In general, order k implies (k-2)-continuity.
+          The degree of a spline goes as 1=linear, 2=quadratic, etc
+          and the degree is the (order-1). 
+          So ksplord=(/3,3,2/) implies quadratic, quadratic and linear along
+          each of the reciprocal lattice basis vectors.
+          The actual value chosen must be non-negative and is finally
+            min(ksplord(i),nk(i))
+          default ksplord(i) = nk(i) the i-th dimension of the input k-grid
+
+
+updatepp : logical
+           Controls whether the pseudopotentials are updated or not when
+           contructing the Hamiltonian - usually to include local projectors.
+           default = .false.
+
+pwmtxel : logical
+          If .true. computes plane-wave matrix elements in the optimal basis
+            <B_i|exp(-iG.r)|B_j>
+          for all available G.
+          default = .false.
+
+elphmtxel : logical
+            If .true. computes electron-phonon matrix elements in the
+            optimal basis
+              <B_i|dvscf|B_j>
+            default = .false.
+
+dvfile, dynfile, elphfile : character(255)
+            filenames relevant to elphmtxel=.true.
+            respectively: the input response of the self-consistent potential to
+                            a phonon perturbation
+                          the input dynamical matrix from a phonon calculation
+                          the output electron-phonon matrix
+            defaults = ' '
+
+nrdv1, nrdv2, nrdv3, nspindv, npedv : integer
+            dimensions relevant to elphmtxel=.true.
+            These give the sizes of the real-space grid, number of spin-channels
+            and number of modes present in the file: dvfile
+            defaults = none
+
+debug : logical
+        if .true. then generate extra output for debugging
+        default = .false.
+
+/
+BLANK LINE
+ nkgrid(1:3), ikgrid(1:3)
+# This is the k-point block containing the integer specification of the grid
+# in the standard form (number of points in each dimn and correpsonding shifts)
+# The grid is constructed differently to those in PW since it must always 
+# contain within its bounds the non-negative BZ [0,1]^3
+
+  nkx = nkgrid(1) + ikgrid(1) + 1
+  nky = nkgrid(2) + ikgrid(2) + 1
+  nkz = nkgrid(3) + ikgrid(3) + 1
+
+  nkgrid_=nkgrid
+  where( nkgrid==0 ) nkgrid_=1
+
+  do i=1,nkx
+     do j=1,nky
+        do k=1,nkz
+           xkx(i) = DBLE(i-1)/nkgrid_(1) - DBLE(ikgrid(1))/2/nkgrid_(1)
+           xky(j) = DBLE(j-1)/nkgrid_(2) - DBLE(ikgrid(2))/2/nkgrid_(2)
+           xkz(k) = DBLE(k-1)/nkgrid_(3) - DBLE(ikgrid(3))/2/nkgrid_(3)
+        end do
+     end do
+  end do
+
+# one can use these grid specifications to control dimensionality
+# for instance, nkgrid(i)=0, ikgrid(i)=0 implies that there is only
+# one k-point (k=0) in this dimension
+
+# if updatepp=.true.
+BLANKLINE
+ nspecies  # number of species
+# do i=1,nspecies
+ local_channel(i), pseudo_file(i)
+# end do
+# This is the updatepp block which provides extra pseudopotential files for
+# inclusion of local projector matrix elements in the Hamiltonian.
+local_channel(i) : integer
+                   specifies the angular momentum quantum number of the local
+                   channel.
+                   -1 indicates that no update is provided for this species
+pseudo_file(i)   : character(255)
+                   the new file to be used to update the pseudo information
+                   the full path must be provided
+# Note that the order of species is the same as in the original PW calculation

@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo
+END
+N.PBE_Ham.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N.PBE_Ham.UPF
+END
+carbon-pbe.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/carbon-pbe.UPF
+END
+H.pbe-van_ak.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/H.pbe-van_ak.UPF
+END
+N_xch.PBE_Ham.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N_xch.PBE_Ham.UPF
+END
+N_xch.PBE_Ham.corerepair.pos
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N_xch.PBE_Ham.corerepair.pos
+END
+N_xch.PBE_Ham.localproj.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N_xch.PBE_Ham.localproj.UPF
+END
+N.pbe-van_ak.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N.pbe-van_ak.UPF
+END
+N1s1.pbe-van_dgp.corevalence.pos
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N1s1.pbe-van_dgp.corevalence.pos
+END
+N1s1.pbe-van_dgp.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/N1s1.pbe-van_dgp.UPF
+END
+hydrogen-pbe.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/hydrogen-pbe.UPF
+END
+C.pbe-van_ak.UPF
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/MFTheory/projects/ESPRESSO/!svn/ver/416/branches/shirley_QE4.3_das/examples/example_shirley06/pseudo/C.pbe-van_ak.UPF
+END

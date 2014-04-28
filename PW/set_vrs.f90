@@ -15,6 +15,10 @@ subroutine set_vrs (vrs, vltot, vr, kedtau, kedtaur,nrxx, nspin, doublegrid)
   USE kinds
   USE funct, only : dft_is_meta
   USE smooth_grid_dimensions, only : nrxxs
+!DASb
+  USE input_parameters,     ONLY : read_extpot
+  USE scf,                  ONLY : vext
+!DASe
   implicit none
 
   integer :: nspin, nrxx
@@ -42,6 +46,11 @@ subroutine set_vrs (vrs, vltot, vr, kedtau, kedtaur,nrxx, nspin, doublegrid)
         vrs (:, is) = vr (:, is)
      else
         vrs (:, is) = vltot (:) + vr (:, is)
+        !DASb
+        if(read_extpot) then
+           vrs (:, is) = vrs (:, is) - 0.5*vext(:)
+        endif
+        !DASe
      end if
      !
      ! ... and interpolate it on the smooth mesh if necessary

@@ -17,7 +17,7 @@ SUBROUTINE force_us( forcenl )
   USE control_flags,        ONLY : gamma_only
   USE cell_base,            ONLY : at, bg, tpiba
   USE ions_base,            ONLY : nat, ntyp => nsp, ityp
-  USE klist,                ONLY : nks, xk, ngk
+  USE klist,                ONLY : nks, xk, ngk, nkstot
   USE gvect,                ONLY : g
   USE uspp,                 ONLY : nkb, vkb, qq, deeq, qq_so, deeq_nc
   USE uspp_param,           ONLY : upf, nh, newpseudo, nhm
@@ -29,9 +29,11 @@ SUBROUTINE force_us( forcenl )
   USE spin_orb,             ONLY : lspinorb
   USE io_files,             ONLY : iunwfc, nwordwfc, iunigk
   USE buffers,              ONLY : get_buffer
-  USE becmod,               ONLY : bec_type, becp, allocate_bec_type, deallocate_bec_type, becunit !DAS
-  USE mp_global,            ONLY : inter_pool_comm, intra_pool_comm, mpime, root !DAS
-  USE mp,                   ONLY : mp_sum
+  USE becmod,               ONLY : bec_type, becp, allocate_bec_type, deallocate_bec_type, becunit, &
+       &becp_g_gl , becp_k_gl, becp_nc_gl  !DAS 
+  USE mp_global,            ONLY : inter_pool_comm, intra_pool_comm, mpime, root, npool, &
+       &root_pool, me_pool, my_pool_id !DAS
+  USE mp,                   ONLY : mp_sum, mp_scatter
   USE io_files, ONLY:find_free_unit !DAS
   !
   IMPLICIT NONE
@@ -39,16 +41,39 @@ SUBROUTINE force_us( forcenl )
   ! ... the dummy variable
   !
   REAL(DP) :: forcenl(3,nat)
+  INTEGER :: ik, ipool
+  INTEGER, ALLOCATABLE :: frunits(:)
+  CHARACTER(LEN=256)::fname
   ! output: the nonlocal contribution
   !
   CALL allocate_bec_type ( nkb, nbnd, becp )   
   !
   !DASb
   if(mpime==root) then
-     becunit=find_free_unit()
-     open(becunit,file='becp.dmp',form='formatted',status='replace')
-     write(becunit,'(1I12)') nks
+     allocate(frunits(npool))
+     do ipool=1, npool
+        frunits(ipool)=find_free_unit()
+        write(fname,'(A8,I6.6)') 'becp.dmp',ipool
+        fname=trim(fname)
+        open(frunits(ipool),file=fname,form='formatted',status='replace')
+!!$        write(*,*) "frunit=",frunits(ipool)
+     enddo
+     do ipool=1,npool
+        close(frunits(ipool)) 
+     enddo
   endif
+  if(me_pool == root_pool) then
+     call mp_scatter(frunits, becunit, root, inter_pool_comm)
+     write(fname,'(A8,I6.6)') 'becp.dmp',(my_pool_id+1)
+     fname=trim(fname)
+     open(becunit,file=fname,form='formatted',status='replace')
+     write(becunit,'(3I12)') nkstot, nks, npool     
+  endif
+!!$  write(*,*) "me_pool, root_pool, becuint = ", me_pool,root_pool,  becunit
+!!$     becunit=find_free_unit()
+!!$     open(becunit,file='becp.dmp',form='formatted',status='replace')
+!!$     write(becunit,'(1I12)') nkstot
+!!$  endif
   !DASe
   !
   IF ( gamma_only ) THEN
@@ -64,7 +89,7 @@ SUBROUTINE force_us( forcenl )
   CALL deallocate_bec_type ( becp )   
   !
   !DASb
-  if(mpime==root) then
+  if(me_pool==root_pool) then
      close(becunit)     
   endif
   !DASe
