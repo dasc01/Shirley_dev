@@ -492,7 +492,8 @@ PROGRAM pw2xas
 !!$           IF (noncolin) THEN
 !!$              CALL partialdos_nc (Emin, Emax, DeltaE, kresolveddos, filpdos)
 !!$           ELSE
-              CALL partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, kresolveddos, filpdos)
+     write(*,*) "calling partialdos..."
+     CALL partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, kresolveddos, filpdos)
 !!$           ENDIF
 !!$           !
 !!$        ENDIF
@@ -673,7 +674,11 @@ SUBROUTINE projwave( filproj, lsym, lgww )
         DO na = 1, nat !loop over atoms
            IF(ityp(na) .eq. nt ) THEN  !atom is of current type
               IF(corerep%core(1)%atom .eq. na) THEN !is the core-excited atom
-                 IF(nbeta .ne. nh(nt)) STOP 'error! wrong number of nbeta'
+                 IF(nbeta .ne. nh(nt)) then
+                    write(*,*) "atom=",na,"type=",ityp(na),"spec=",corerep%core(1)%species
+                    write(*,*) 'error! wrong number of nbeta, nh(nt)',nbeta, nh(nt)
+                    STOP
+                 endif
                  IF(gamma_only) THEN
                     DO nb=1, nbeta
                        DO ibnd=1, nbnd
@@ -779,6 +784,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   elumo=et(nbnd,1)
   DO ik=1, nkstot
      DO ibnd=1,nbnd
+        write(*,*) "occ: ik, ibnd=", ik, ibnd
         if(et(ibnd,ik) .gt. ehomo .and. et(ibnd,ik) .le. ef ) ehomo=et(ibnd,ik)
         if(et(ibnd,ik) .lt. elumo .and. et(ibnd,ik) .ge. ef ) elumo=et(ibnd,ik)
         if(trim(spectype) .eq. 'RAW') then
@@ -798,6 +804,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
         endif
      ENDDO
   ENDDO
+  write(*,*) "done occ..."
 
   DeltaE = DeltaE/rytoev   !convert to Ryd
   broadening = broadening/rytoev !convert to Ryd
@@ -830,6 +837,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   do ie=1,nener
     ener(ie) = Emin + dble(ie-1)*dE
   enddo
+  write(*,*) "done erange..."
 
 
   !
@@ -849,6 +857,8 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
 !!$  ie_delta = 5 * degauss / DeltaE + 1
 
   DO ik = 1,nkstot
+     write(*,*) "ik=",ik
+
      ! use true weights
      wkeff=wk(ik)
      ! contributions from all k-points are summed in pdos(:,:,:,ikeff)
@@ -856,6 +866,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
      !
      IF ( nspin == 2 ) current_spin = isk ( ik )
      DO ibnd = 1, nbnd
+     write(*,*) "ibnd=",ibnd
         etev = et(ibnd,ik)
         forall(j=1:3) xas_xyz_sp(j,current_spin) = sum(conjg(proj_aux(1:ncp,ibnd,j,ik))*proj_aux(1:ncp,ibnd,j,ik))*wk(ik)*occ(ibnd,ik)
         tmp_spec(:,:)=0.0d0
@@ -866,6 +877,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   ENDDO
   if(allocated(xas_xyz_sp)) deallocate(xas_xyz_sp)
   if(allocated(tmp_spec)) deallocate(tmp_spec)
+  write(*,*) "done spec..."
 
 
   iunout=4

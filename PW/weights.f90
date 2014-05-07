@@ -28,7 +28,8 @@ SUBROUTINE weights()
   USE mp,                   ONLY : mp_bcast, mp_sum
   USE io_global,            ONLY : ionode, ionode_id
 !DASb
-  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex
+  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex, read_extwfc, read_extocc
+  USE proj_weights,         ONLY : set_proj_weights,set_ext_weights
 !DASe
   !
   IMPLICIT NONE
@@ -109,6 +110,9 @@ SUBROUTINE weights()
      CALL mp_sum( netot, inter_pool_comm )
      write(*,'(A,F12.6)') "netot=",netot
      !
+  ELSE IF (read_extocc ) THEN
+     call set_ext_weights( nks, nkstot, wk, nbnd, nelec, degauss, &
+          ngauss, et, ef, demet, netot, wg, 0, isk)
 !DASe
   ELSE IF ( lgauss ) THEN
      !
@@ -153,6 +157,11 @@ SUBROUTINE weights()
      END IF
      !
   END IF
+  !DASb
+!!$  if(read_extocc) call set_ext_weights( nks, nkstot, wk, nbnd, nelec, degauss, &
+!!$       ngauss, et, ef, demet, netot, wg, 0, isk)
+  if(read_extwfc) call set_proj_weights()
+  !DASe
   !
   ! ... collect all weights on the first pool;
   ! ... not needed for calculation but useful for printout 

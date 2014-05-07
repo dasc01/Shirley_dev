@@ -355,6 +355,10 @@ CONTAINS
     ! ... here the local variables
     !
     INTEGER :: ipol
+    !DASb
+    TYPE (bec_type)::psipsi
+!!$    COMPLEX(DP),ALLOCATABLE::psis(:,:)
+    !DASe
     !
     IF ( lelfield ) THEN
        !
@@ -384,6 +388,14 @@ CONTAINS
        ENDIF
        !
     END IF
+    !
+!!$    !DASb
+!!$    CALL allocate_bec_type(nbnd, nbnd, psipsi)
+!!$    allocate(psis(npwx,nbnd))
+!!$    psis=conjg(evc)
+!!$    CALL calbec(npw, evc, evc, psipsi)
+!!$    CALL deallocate_bec_type ( psipsi )
+!!$    !DASe
     !
     IF ( isolve == 1 ) THEN
        !

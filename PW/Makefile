@@ -32,6 +32,7 @@ bp_calc_btq.o \
 bp_qvan3.o \
 bp_strings.o \
 buffers.o \
+buffers2.o \
 c_bands.o \
 c_phase_field.o \
 ccgdiagg.o \
@@ -90,6 +91,7 @@ gk_sort.o \
 gradcorr.o \
 gweights.o \
 eh_weights.o \
+proj_weights.o \
 g2_kin.o \
 h_epsi_her_apply.o \
 h_epsi_her_set.o \

@@ -142,7 +142,8 @@ SUBROUTINE s_psi( lda, n, m, psi, spsi )
        !
        ! ... k-points version
        !
-       USE becmod,  ONLY : becp
+       USE becmod,  ONLY : becp, &
+            bec_type, allocate_bec_type, deallocate_bec_type, calbec  !DAS
        !
        IMPLICIT NONE
        !
@@ -152,6 +153,9 @@ SUBROUTINE s_psi( lda, n, m, psi, spsi )
          ! counters
        COMPLEX(DP), ALLOCATABLE :: ps(:,:)
          ! the product vkb and psi
+       !DASb
+       TYPE (bec_type)::psipsi
+       !DASe
        !
        ALLOCATE( ps( nkb, m ) )    
        !
@@ -196,6 +200,11 @@ SUBROUTINE s_psi( lda, n, m, psi, spsi )
        !
        DEALLOCATE( ps )
        !
+       !DASb
+       CALL allocate_bec_type(m, m, psipsi)
+       CALL calbec(n, psi, spsi, psipsi)
+       CALL deallocate_bec_type ( psipsi )
+       !DASe
        RETURN
        !
      END SUBROUTINE s_psi_k     

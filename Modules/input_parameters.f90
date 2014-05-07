@@ -450,10 +450,13 @@ MODULE input_parameters
         LOGICAL   :: scf_psolver = .false.
         LOGICAL   :: eh_scf      = .false.
         LOGICAL   :: read_extpot = .false.
+        LOGICAL   :: read_extwfc = .false.
+        LOGICAL   :: read_extocc = .false.
         REAL (DP) :: eg_min=0.0_DP
         REAL (DP) :: e_excit=0.0_DP
         REAL (DP) :: nholes=0.0_DP
         REAL (DP) :: ncorex=0.0_DP
+        CHARACTER(len=256) :: auxprefix = ''
 !DASe
 !
         LOGICAL   :: london = .false.
@@ -470,7 +473,8 @@ MODULE input_parameters
              qcutz, q2sigma, lda_plus_U, Hubbard_U, Hubbard_alpha,            &
              edir, emaxpos, eopreg, eamp, smearing, starting_ns_eigenvalue,   &
              U_projection_type, input_dft, la2F, assume_isolated,             &
-             use_psolver, scf_psolver,eh_scf,eg_min,e_excit,nholes,ncorex,read_extpot, &
+             use_psolver, scf_psolver,eh_scf,eg_min,e_excit,nholes,ncorex,&
+             read_extpot,read_extwfc,read_extocc,auxprefix, &
 #if defined (EXX)
              x_gamma_extrapolation, nqx1, nqx2, nqx3,                         &
              exxdiv_treatment, x_gamma_extrapolation, yukawa, ecutvcut,       &
