@@ -160,7 +160,7 @@ SUBROUTINE weights()
   !DASb
 !!$  if(read_extocc) call set_ext_weights( nks, nkstot, wk, nbnd, nelec, degauss, &
 !!$       ngauss, et, ef, demet, netot, wg, 0, isk)
-  if(read_extwfc) call set_proj_weights()
+!!$  if(read_extwfc) call set_proj_weights()
   !DASe
   !
   ! ... collect all weights on the first pool;

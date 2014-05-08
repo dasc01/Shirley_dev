@@ -74,7 +74,11 @@ SUBROUTINE electrons()
   USE paw_symmetry,         ONLY : PAW_symmetrize_ddd
   USE uspp_param,           ONLY : nh, nhm ! used for PAW
   USE dfunct,                 only : newd
+!DASb
   USE input_parameters, ONLY : use_psolver,scf_psolver
+  USE input_parameters,     ONLY : read_extwfc, read_extocc
+  USE proj_weights,         ONLY : set_proj_weights,set_ext_weights
+!DASe
   !
   !
   IMPLICIT NONE
@@ -436,6 +440,9 @@ SUBROUTINE electrons()
      !
      IF ( nks == 1 .AND. (io_level < 2) ) &
         CALL save_buffer ( evc, nwordwfc, iunwfc, nks )
+  !DASb
+     if(read_extwfc) call set_proj_weights()
+  !DASe
      !
      ! ... calculate the polarization
      !

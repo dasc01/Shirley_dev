@@ -483,7 +483,7 @@ PROGRAM pw2xas
 !!$     ENDIF
 !!$  ENDIF
   !
-  IF ( ionode ) THEN
+!!$  IF ( ionode ) THEN
 !!$     IF ( tdosinboxes ) THEN
 !!$        CALL partialdos_boxes (Emin, Emax, DeltaE, kresolveddos, filpdos, n_proj_boxes)
 !!$     ELSE
@@ -498,7 +498,7 @@ PROGRAM pw2xas
 !!$           !
 !!$        ENDIF
 !!$     ENDIF
-  ENDIF
+!!$  ENDIF
   !
   CALL stop_pp
   !
@@ -715,7 +715,7 @@ SUBROUTINE projwave( filproj, lsym, lgww )
 !!$     deallocate(temp,tcr)
      ! on k-points
   ENDDO
-  CALL poolrecover (proj_aux, ncp*nbnd*3, nkstot, nks)
+!!$  CALL poolrecover (proj_aux, ncp*nbnd*3, nkstot, nks)
   !
   !
   RETURN
@@ -725,13 +725,14 @@ END SUBROUTINE projwave
 SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, kresolveddos, filpdos)
   !-----------------------------------------------------------------------
   !
-  USE io_global,  ONLY : stdout
+  USE io_global,  ONLY : stdout, ionode, ionode_id
   USE basis, ONLY : natomwfc
   USE ions_base, ONLY : ityp, atm
-  USE klist, ONLY: wk, nkstot, degauss, ngauss, lgauss, nelec
+  USE klist, ONLY: wk, nkstot, nks, degauss, ngauss, lgauss, nelec
   USE lsda_mod, ONLY: nspin, isk, current_spin
   USE wvfct, ONLY: et, nbnd, wg
   USE constants, ONLY: rytoev
+  USE mp_global, ONLY:mp_bcast, mp_sum, inter_pool_comm
   !
   USE projections
   ! for XAS
@@ -777,34 +778,39 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   else
      ef = efermig (et, nbnd, nkstot, nelec, wk, degauss, ngauss, 0, isk)
   endif
-
+  CALL mp_bcast(ef, ionode_id)
   ALLOCATE(occ(nbnd,nkstot))
   occ=0.0d0
   ehomo=et(1,1)
   elumo=et(nbnd,1)
-  DO ik=1, nkstot
-     DO ibnd=1,nbnd
-        write(*,*) "occ: ik, ibnd=", ik, ibnd
-        if(et(ibnd,ik) .gt. ehomo .and. et(ibnd,ik) .le. ef ) ehomo=et(ibnd,ik)
-        if(et(ibnd,ik) .lt. elumo .and. et(ibnd,ik) .ge. ef ) elumo=et(ibnd,ik)
-        if(trim(spectype) .eq. 'RAW') then
-           occ(ibnd,ik)=1.0d0
-        else if (trim(spectype) .eq. 'XAS') then
-           if(fixocc) then
-              occ(ibnd,ik)= 1 - (wg(ibnd,ik)/wk(ik))
-           else
-              occ(ibnd,ik)=1-wgauss((ef-et(ibnd,ik)) / degauss, ngauss)
+  if(ionode) then
+     DO ik=1, nkstot
+        DO ibnd=1,nbnd
+!!$        write(*,*) "occ: ik, ibnd=", ik, ibnd
+           if(et(ibnd,ik) .gt. ehomo .and. et(ibnd,ik) .le. ef ) ehomo=et(ibnd,ik)
+           if(et(ibnd,ik) .lt. elumo .and. et(ibnd,ik) .ge. ef ) elumo=et(ibnd,ik)
+           if(trim(spectype) .eq. 'RAW') then
+              occ(ibnd,ik)=1.0d0
+           else if (trim(spectype) .eq. 'XAS') then
+              if(fixocc) then
+                 occ(ibnd,ik)= 1 - (wg(ibnd,ik)/wk(ik))
+              else
+                 occ(ibnd,ik)=1-wgauss((ef-et(ibnd,ik)) / degauss, ngauss)
+              endif
+           else if (trim(spectype) .eq. 'XES') then
+              if(fixocc) then
+                 occ(ibnd,ik)= wg(ibnd,ik)/wk(ik)
+              else
+                 occ(ibnd,ik)=wgauss((ef-et(ibnd,ik)) / degauss, ngauss)
+              endif
            endif
-        else if (trim(spectype) .eq. 'XES') then
-           if(fixocc) then
-              occ(ibnd,ik)= wg(ibnd,ik)/wk(ik)
-           else
-              occ(ibnd,ik)=wgauss((ef-et(ibnd,ik)) / degauss, ngauss)
-           endif
-        endif
+        ENDDO
      ENDDO
-  ENDDO
   write(*,*) "done occ..."
+  endif
+  CALL poolscatter(nbnd, nkstot, occ, nks, occ)
+  CALL mp_bcast(ehomo, ionode_id)
+  CALL mp_bcast(elumo, ionode_id)
 
   DeltaE = DeltaE/rytoev   !convert to Ryd
   broadening = broadening/rytoev !convert to Ryd
@@ -817,22 +823,26 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   !
   Elw = et (1, 1)
   Eup = et (nbnd, 1)
-  DO ik = 2, nkstot
-     Elw = min (Elw, et (1, ik) )
-     Eup = max (Eup, et (nbnd, ik) )
-  ENDDO
-  IF (broadening/=0.d0) THEN
-     Eup = Eup + 5d0 * broadening
-     Elw = Elw - 5d0 * broadening
-  ENDIF
-  Emin=Emin/rytoev
-  Emax=Emax/rytoev
-  if(Emin .le. -1000.d0) Emin = max (Emin, Elw)
-  if(Emax .ge. +1000.d0) Emax = min (Emax, Eup)
-  if(trim(spectype) .eq. 'RAW') then
-     Emin = Elw
-     Emax = Eup
+  if(ionode) then
+     DO ik = 2, nkstot
+        Elw = min (Elw, et (1, ik) )
+        Eup = max (Eup, et (nbnd, ik) )
+     ENDDO
+     IF (broadening/=0.d0) THEN
+        Eup = Eup + 5d0 * broadening
+        Elw = Elw - 5d0 * broadening
+     ENDIF
+     Emin=Emin/rytoev
+     Emax=Emax/rytoev
+     if(Emin .le. -1000.d0) Emin = max (Emin, Elw)
+     if(Emax .ge. +1000.d0) Emax = min (Emax, Eup)
+     if(trim(spectype) .eq. 'RAW') then
+        Emin = Elw
+        Emax = Eup
+     endif
   endif
+  CALL mp_bcast(Emin, ionode_id)
+  CALL mp_bcast(Emax, ionode_id)
   dE = (Emax - Emin)/dble(Nener)
   do ie=1,nener
     ener(ie) = Emin + dble(ie-1)*dE
@@ -856,8 +866,8 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   current_spin = 1
 !!$  ie_delta = 5 * degauss / DeltaE + 1
 
-  DO ik = 1,nkstot
-     write(*,*) "ik=",ik
+  DO ik = 1,nks
+!!$     write(*,*) "ik=",ik
 
      ! use true weights
      wkeff=wk(ik)
@@ -866,7 +876,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
      !
      IF ( nspin == 2 ) current_spin = isk ( ik )
      DO ibnd = 1, nbnd
-     write(*,*) "ibnd=",ibnd
+!!$     write(*,*) "ibnd=",ibnd
         etev = et(ibnd,ik)
         forall(j=1:3) xas_xyz_sp(j,current_spin) = sum(conjg(proj_aux(1:ncp,ibnd,j,ik))*proj_aux(1:ncp,ibnd,j,ik))*wk(ik)*occ(ibnd,ik)
         tmp_spec(:,:)=0.0d0
@@ -879,6 +889,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   if(allocated(tmp_spec)) deallocate(tmp_spec)
   write(*,*) "done spec..."
 
+  CALL mp_sum( spec, inter_pool_comm )
 
   iunout=4
   fileout = trim(filpdos)//".pw.raw"
@@ -887,22 +898,23 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   else if(trim(spectype) .eq. 'XES') then
      fileout = trim(filpdos)//".pw.xes"
   endif
-  
-  OPEN (iunout,file=fileout,form='formatted', status='unknown')
-
+  if(ionode) then
+     OPEN (iunout,file=fileout,form='formatted', status='unknown')
+  endif
 
   do ispin=1, nspin
      forall( ie=1:nener) spec(ie,1,ispin) = sum(spec(ie,2:4,ispin))/3.d0
   enddo
-  write(iunout,'(a,f12.5,a)') '# Applied a delta shift of ', DeltaE*rytoev, ' eV'
-  do ispin=1, nspin
-     write(iunout,*) '#SPIN=',ispin
-     do ie=1,nener
-        write(iunout,'(5e14.5e3)') ener(ie)*rytoev,spec(ie,1:4,ispin)
+  if(ionode) then
+     write(iunout,'(a,f12.5,a)') '# Applied a delta shift of ', DeltaE*rytoev, ' eV'
+     do ispin=1, nspin
+        write(iunout,*) '#SPIN=',ispin
+        do ie=1,nener
+           write(iunout,'(5e14.5e3)') ener(ie)*rytoev,spec(ie,1:4,ispin)
+        enddo
      enddo
-  enddo
-  close(iunout)
-  
+     close(iunout)
+  endif
   DEALLOCATE (proj_aux, spec)
   !
   RETURN
