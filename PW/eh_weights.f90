@@ -138,3 +138,81 @@ function gaus(de,dg)
 
   return
 end function gaus
+
+
+!--------------------------------------------------------------------
+subroutine e_last_elec(nk, nbnd, nelec, nspin, eig, wg, is, isk)
+  !--------------------------------------------------------------------
+  !     calculates weights with the gaussian spreading technique
+  USE kinds
+  USE constants, ONLY: rytoev
+  implicit none
+  !
+  integer, intent(in) :: nk, nbnd, nspin
+  real(DP), intent(in) :: eig (nbnd, nk), nelec
+  real(DP), intent(out) :: wg (nbnd, nk) 
+  integer, intent(in) :: is, isk(nk)
+  !
+  integer :: kpoint, ibnd, ispin, pk, qk, nbk, numk
+  real(DP):: etmp, sumw, avge, dw
+  real(DP),allocatable::eig_srtd(:,:),wg_srtd(:,:),ik(:)
+  logical:: break
+
+  numk=nk/nspin
+  ! Calculate the Fermi energy ef
+  allocate(eig_srtd(nbnd*numk,nspin),wg_srtd(nbnd*numk,nspin),ik(nspin))
+  nbk=nbnd*numk
+  ik(:)=1
+  do ibnd=nbnd,1,-1
+     do  kpoint = 1, nk
+        if(isk(kpoint) .eq. 0 .or. isk(kpoint) .eq. 1) then
+           eig_srtd(ik(1),1)=eig(ibnd,kpoint)
+           wg_srtd(ik(1),1)=wg(ibnd,kpoint)
+           ik(1)=ik(1)+1
+        else if(isk(kpoint) .eq. 2) then
+           eig_srtd(ik(2),2)=eig(ibnd,kpoint)
+           wg_srtd(ik(2),2)=wg(ibnd,kpoint)
+           ik(2)=ik(2)+1
+        endif
+     enddo
+  enddo
+  
+  do ispin=1, nspin
+     do pk=nbk,1,-1
+        do qk=1, pk-1
+           if(eig_srtd(qk,ispin) .lt. eig_srtd(qk+1,ispin)) then
+              etmp=eig_srtd(qk+1,ispin)
+              eig_srtd(qk+1,ispin)=eig_srtd(qk,ispin)
+              eig_srtd(qk,ispin)=etmp
+              
+              etmp=wg_srtd(qk+1,ispin)
+              wg_srtd(qk+1,ispin)=wg_srtd(qk,ispin)
+              wg_srtd(qk,ispin)=etmp
+           endif
+        enddo
+     enddo
+  enddo
+
+  do ispin=1, nspin
+     sumw=0.0d0
+     avge=0.0d0
+     pk=1
+     break=.false.
+     do while(sumw <= 1.0d0)
+        if(sumw+wg_srtd(pk,ispin) .gt. 1.0d0) then
+           dw=(1.0d0-sumw)
+           break=.true.
+        else
+           dw=wg_srtd(pk,ispin)
+        endif
+        avge=avge+eig_srtd(pk,ispin)*dw
+        sumw=sumw+dw
+        if(break) exit
+        pk=pk+1
+     enddo
+     avge=avge/sumw
+     write(*,'(A,I4,F16.10,A)') "     Energy of last electron with spin", ispin,avge*rytoev," eV"  
+  enddo
+  
+  return
+end subroutine e_last_elec

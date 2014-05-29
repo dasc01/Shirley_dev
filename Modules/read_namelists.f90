@@ -826,6 +826,7 @@ MODULE read_namelists_module
        CALL mp_bcast( nholes,                ionode_id )
        CALL mp_bcast( ncorex,                ionode_id )
        CALL mp_bcast( auxprefix,             ionode_id )
+       CALL mp_bcast( print_esomo,           ionode_id )
        !DASe
        CALL mp_bcast( one_atom_occupations,      ionode_id )
        CALL mp_bcast( spline_ps,                 ionode_id )

@@ -28,7 +28,8 @@ SUBROUTINE weights()
   USE mp,                   ONLY : mp_bcast, mp_sum
   USE io_global,            ONLY : ionode, ionode_id
 !DASb
-  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex, read_extwfc, read_extocc
+  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex, read_extwfc, read_extocc, &
+       &print_esomo
   USE proj_weights,         ONLY : set_proj_weights,set_ext_weights
 !DASe
   !
@@ -42,6 +43,7 @@ SUBROUTINE weights()
   real (DP) demet_up, demet_dw
   !DASb
   real (DP)::netot
+  real (DP),allocatable::eig_tmp(:,:)
   !DASe
   !
   demet         = 0.D0
@@ -167,6 +169,17 @@ SUBROUTINE weights()
   ! ... not needed for calculation but useful for printout 
   !
   CALL poolrecover( wg, nbnd, nkstot, nks )
+!DASb
+  if(print_esomo) then
+     if(.not. allocated(eig_tmp)) allocate(eig_tmp(nbnd,nkstot))
+     eig_tmp(:,:)=et(:,:)
+     CALL poolrecover( eig_tmp, nbnd, nkstot, nks )
+     if(ionode .and. print_esomo) then
+        call e_last_elec(nkstot, nbnd, nelec, nspin, eig_tmp, wg, is, isk)
+     endif
+     if(allocated(eig_tmp)) deallocate(eig_tmp)
+  endif
+!DASe
   !
   RETURN
   !

@@ -452,6 +452,7 @@ MODULE input_parameters
         LOGICAL   :: read_extpot = .false.
         LOGICAL   :: read_extwfc = .false.
         LOGICAL   :: read_extocc = .false.
+        LOGICAL   :: print_esomo = .false.
         REAL (DP) :: eg_min=0.0_DP
         REAL (DP) :: e_excit=0.0_DP
         REAL (DP) :: nholes=0.0_DP
@@ -474,7 +475,7 @@ MODULE input_parameters
              edir, emaxpos, eopreg, eamp, smearing, starting_ns_eigenvalue,   &
              U_projection_type, input_dft, la2F, assume_isolated,             &
              use_psolver, scf_psolver,eh_scf,eg_min,e_excit,nholes,ncorex,&
-             read_extpot,read_extwfc,read_extocc,auxprefix, &
+             read_extpot,read_extwfc,read_extocc,auxprefix, print_esomo, &
 #if defined (EXX)
              x_gamma_extrapolation, nqx1, nqx2, nqx3,                         &
              exxdiv_treatment, x_gamma_extrapolation, yukawa, ecutvcut,       &

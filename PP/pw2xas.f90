@@ -814,9 +814,9 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
 
   DeltaE = DeltaE/rytoev   !convert to Ryd
   broadening = broadening/rytoev !convert to Ryd
-  if(trim(spectype) .eq. 'XAS' .or. trim(spectype) .eq. 'XES') then
-     DeltaE=DeltaE-elumo
-  endif
+!  if(trim(spectype) .eq. 'XAS' .or. trim(spectype) .eq. 'XES') then
+!     DeltaE=DeltaE-elumo
+!  endif
   !
   !
   ! find band extrema
