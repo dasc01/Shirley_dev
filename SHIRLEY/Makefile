@@ -133,6 +133,9 @@ COND_PARA = cond_para.o fermi.o start_shirley.o freeunit.o mpio.o \
 EFERMI = efermi.o fermi.o \
             ../PW/efermit.o ../PW/sumkt.o ../flib/dost.o ../flib/sort.o \
             $(NEWDIAGOBJ)
+EFERMI_NSP = efermi_nsp.o fermi.o \
+            ../PW/efermit.o ../PW/sumkt.o ../flib/dost.o ../flib/sort.o \
+            $(NEWDIAGOBJ)
 PLASMA_FREQ = plasma_freq.o fermi.o start_shirley.o freeunit.o mpio.o
 
 SHIRLEY_OPT = shirley_opt.o $(NEWDIAGOBJ)
@@ -272,6 +275,7 @@ PWOBJS = \
 ../PW/bp_qvan3.o \
 ../PW/bp_strings.o \
 ../PW/buffers.o \
+../PW/buffers2.o \
 ../PW/ccgdiagg.o \
 ../PW/cdiagh.o \
 ../PW/cdiaghg.o \
@@ -408,6 +412,8 @@ PWOBJS = \
 ../PW/wannier_init.o \
 ../PW/weights.o \
 ../PW/eh_weights.o \
+../PW/def_weights.o \
+../PW/proj_weights.o \
 ../PW/wfcinit.o \
 ../PW/write_ns.o \
 ../PW/wsweight.o \
@@ -447,6 +453,7 @@ XAS_PARA_EXE=xas_para$(DEBUG).x
 BANDSTRUCT_EXE=bandstruct$(DEBUG).x
 COND_PARA_EXE=cond_para$(DEBUG).x
 EFERMI_EXE=efermi$(DEBUG).x
+EFERMI_NSP_EXE=efermi_nsp$(DEBUG).x
 PLASMA_FREQ_EXE=plasma_freq$(DEBUG).x
 GETTEST_EXE=gettest$(DEBUG).x
 SHIRLEY_OPT_EXE=shirley_opt$(DEBUG).x
@@ -479,6 +486,7 @@ $(SHIRLEY_HAM_EXE) \
 $(SHIRLEY_QDIAGP_EXE) \
 $(BANDSTRUCT_EXE) \
 $(EFERMI_EXE) \
+$(EFERMI_NSP_EXE) \
 $(SHIRLEY_XAS_EXE) \
 $(PW2XAS_EXE)\
 $(XAS_PARA_EXE) \
@@ -605,6 +613,11 @@ $(COND_PARA_EXE) : $(COND_PARA) $(PW_QDIAGP) $(MODULES) $(LIBOBJS)
 $(EFERMI_EXE) : $(EFERMI) $(PW_QDIAGP) $(MODULES) $(LIBOBJS)
 	$(MPIF90) $(LDFLAGS) -o $@ \
 	       $(EFERMI) $(PW_QDIAGP) $(MODULES) $(LIBOBJS) $(LIBS)
+	- ( cd ../bin ; $(COPY) ../SHIRLEY/$@ . )
+
+$(EFERMI_NSP_EXE) : $(EFERMI_NSP) $(PW_QDIAGP) $(MODULES) $(LIBOBJS)
+	$(MPIF90) $(LDFLAGS) -o $@ \
+	       $(EFERMI_NSP) $(PW_QDIAGP) $(MODULES) $(LIBOBJS) $(LIBS)
 	- ( cd ../bin ; $(COPY) ../SHIRLEY/$@ . )
 
 $(PLASMA_FREQ_EXE) : $(PLASMA_FREQ) $(PW_QDIAGP)

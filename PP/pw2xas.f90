@@ -311,7 +311,8 @@ PROGRAM pw2xas
   USE io_global,  ONLY : stdout, ionode, ionode_id
   USE constants,  ONLY : rytoev
   USE kinds,      ONLY : DP
-  USE klist,      ONLY : degauss, ngauss, lgauss
+  USE klist,      ONLY : degauss, ngauss, lgauss, nkstot
+  USE wvfct,      ONLY : nbnd
   USE io_files,   ONLY : nd_nmbr, prefix, tmp_dir, trimcheck
   USE noncollin_module, ONLY : noncolin
   USE mp,               ONLY : mp_bcast
@@ -329,10 +330,10 @@ PROGRAM pw2xas
   CHARACTER (len=256) :: filpdos, filproj, io_choice, outdir, chapprox, spectype
   REAL (DP)      :: Emin, Emax, DeltaE, degauss1, smoothing, broadening
   INTEGER :: ngauss1, ios, Nener
-  LOGICAL :: lsym, kresolveddos, tdosinboxes, plotboxes, fixocc
+  LOGICAL :: lsym, kresolveddos, tdosinboxes, plotboxes, fixocc, readocc
   INTEGER, PARAMETER :: N_MAX_BOXES = 999
   INTEGER :: n_proj_boxes, irmin(3,N_MAX_BOXES), irmax(3,N_MAX_BOXES)
-
+  REAL (DP),allocatable:: occs(:,:)
   !
   ! for GWW
   INTEGER :: iun, idum
@@ -347,7 +348,7 @@ PROGRAM pw2xas
              Emin, Emax, Nener, DeltaE, io_choice, smoothing, filpdos, filproj, &
              lgww, & !if .true. use GW QP energies from file bands.dat
              kresolveddos, tdosinboxes, n_proj_boxes, irmin, irmax, plotboxes, &
-             readcorerep, chapprox, broadening, spectype, fixocc
+             readcorerep, chapprox, broadening, spectype, fixocc, readocc
   !
   ! initialise environment
   !
@@ -382,6 +383,7 @@ PROGRAM pw2xas
   broadening = 0.0
   spectype='RAW'
   fixocc=.false.
+  readocc=.false.
   !
   ios = 0
   !
@@ -426,6 +428,7 @@ PROGRAM pw2xas
   CALL mp_bcast( broadening, ionode_id )
   CALL mp_bcast( spectype, ionode_id )
   CALL mp_bcast( fixocc, ionode_id )
+  CALL mp_bcast( readocc, ionode_id )
   !
   !   Now allocate space for pwscf variables, read and check them.
   !
@@ -441,7 +444,14 @@ PROGRAM pw2xas
      endif
      call bcast_corerepair( corerep, ionode_id )
   endif
-
+  if(readocc) then
+     allocate(occs(nbnd,nkstot))
+     if(ionode) then
+        call read_occs( 5, nkstot, nbnd, occs )
+        write(stdout,*) 'done reading occupations'
+     endif
+     call mp_bcast(occs, ionode_id)
+  endif
   !
   !   decide Gaussian broadening
   !
@@ -493,7 +503,7 @@ PROGRAM pw2xas
 !!$              CALL partialdos_nc (Emin, Emax, DeltaE, kresolveddos, filpdos)
 !!$           ELSE
      write(*,*) "calling partialdos..."
-     CALL partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, kresolveddos, filpdos)
+     CALL partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, readocc, occs, kresolveddos, filpdos)
 !!$           ENDIF
 !!$           !
 !!$        ENDIF
@@ -722,7 +732,7 @@ SUBROUTINE projwave( filproj, lsym, lgww )
   !
 END SUBROUTINE projwave
 !-----------------------------------------------------------------------
-SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, kresolveddos, filpdos)
+SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectype, fixocc, readocc, ext_occ, kresolveddos, filpdos)
   !-----------------------------------------------------------------------
   !
   USE io_global,  ONLY : stdout, ionode, ionode_id
@@ -741,8 +751,8 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   !
   IMPLICIT NONE
   CHARACTER (len=256) :: filpdos, chapprox, spectype
-  REAL(DP) :: Emin, Emax, DeltaE, broadening
-  LOGICAL :: kresolveddos, fixocc
+  REAL(DP) :: Emin, Emax, DeltaE, broadening, ext_occ(nbnd,nkstot)
+  LOGICAL :: kresolveddos, fixocc, readocc
   INTEGER :: Nener
   !
   CHARACTER (len=33) :: filextension
@@ -773,8 +783,10 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
 !!$  ENDIF
 
 
-  if(trim(chapprox) .eq. 'XCH') then
+  if(trim(chapprox) .eq. 'XCH' .and. spectype .eq. 'XAS') then
      ef = efermig (et, nbnd, nkstot, nelec-1, wk, degauss, ngauss, 0, isk)
+  else if(trim(chapprox) .eq. 'FCH' .and. spectype .eq. 'XES') then
+     ef = efermig (et, nbnd, nkstot, nelec, wk, degauss, ngauss, 0, isk)
   else
      ef = efermig (et, nbnd, nkstot, nelec, wk, degauss, ngauss, 0, isk)
   endif
@@ -806,7 +818,15 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
            endif
         ENDDO
      ENDDO
-  write(*,*) "done occ..."
+!  write(*,*) "done occ..."
+     if(readocc) then
+        if (trim(spectype) .eq. 'XAS') then
+           occ(:,:)=1.0d0-(ext_occ(:,:)*nspin/2.0)
+        else if (trim(spectype) .eq. 'XES') then
+           occ(:,:)=(ext_occ(:,:)*nspin/2.0)
+        endif
+     endif
+!     write(*,*) occ
   endif
   CALL poolscatter(nbnd, nkstot, occ, nks, occ)
   CALL mp_bcast(ehomo, ionode_id)
@@ -847,7 +867,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   do ie=1,nener
     ener(ie) = Emin + dble(ie-1)*dE
   enddo
-  write(*,*) "done erange..."
+!  write(*,*) "done erange..."
 
 
   !
@@ -887,7 +907,7 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   ENDDO
   if(allocated(xas_xyz_sp)) deallocate(xas_xyz_sp)
   if(allocated(tmp_spec)) deallocate(tmp_spec)
-  write(*,*) "done spec..."
+!  write(*,*) "done spec..."
 
   CALL mp_sum( spec, inter_pool_comm )
 
@@ -919,6 +939,29 @@ SUBROUTINE  partialdos (Emin, Emax, DeltaE, Nener, broadening, chapprox, spectyp
   !
   RETURN
 END SUBROUTINE partialdos
+! ----------------------------------------------------------------------
+  subroutine read_occs( iunit, nkstot, nbnd, occs )
+! ----------------------------------------------------------------------
+  ! for XAS
+  !
+  !
+  USE kinds, only : DP
+  integer,intent(in) :: iunit,nkstot,nbnd
+  real(DP)::occs(nbnd,nkstot)
+
+  integer :: ik, ibnd
+!  integer,external :: freeunit
+! occupation numbers expected one per line.
+  read(iunit,*) ! heading
+  do ik=1,nkstot
+     do ibnd=1, nbnd
+        read(iunit,*) occs(ibnd,ik)
+     enddo
+  enddo
+
+  end subroutine read_occs
+
+! ----------------------------------------------------------------------
 !
 !!$!-----------------------------------------------------------------------
 !!$SUBROUTINE write_io_header(filplot, iunplot, title, nr1x, nr2x, nr3x, &

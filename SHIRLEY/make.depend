@@ -121,6 +121,12 @@ efermi.o : ../Modules/mp_global.o
 efermi.o : ../Modules/parallel_include.o
 efermi.o : fermi.o
 efermi.o : mpio.o
+efermi_nsp.o : ../Modules/io_global.o
+efermi_nsp.o : ../Modules/mp.o
+efermi_nsp.o : ../Modules/mp_global.o
+efermi_nsp.o : ../Modules/parallel_include.o
+efermi_nsp.o : fermi.o
+efermi_nsp.o : mpio.o
 elph_shirley.o : ../Modules/cell_base.o
 elph_shirley.o : ../Modules/control_flags.o
 elph_shirley.o : ../Modules/fft_base.o

@@ -139,7 +139,7 @@ FLIB_TARGETS   = all
 BIGDFT_DIR="/global/home/users/dasc/Builds/bigdft-1.6.0/imkl"
 BDFT_LIBS=-L$(BIGDFT_DIR)/libxc-1.1.0/src/.libs  -L$(BIGDFT_DIR)/libABINIT/src $(BIGDFT_DIR)/src/libbigdft.a -labinit $(BIGDFT_DIR)/src/libdft_common.a  -lxc 
 #Uncomment the next line for making pw and pp and comment it out for making shirley_ham.x
-SPLINE_LIB=../Modules/bspline90_22.o
+#SPLINE_LIB=../Modules/bspline90_22.o
 BIGDFT_LIB=$(BDFT_LIBS) $(SPLINE_LIB)
 #DASe
 

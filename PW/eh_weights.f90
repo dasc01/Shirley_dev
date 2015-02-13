@@ -21,7 +21,7 @@ subroutine eh_weights (nks, wk, nbnd, nelec, nholes, ncorex, eg_min, e_excit, de
   !
   integer :: kpoint, ibnd
   real(DP) , external :: wgauss, w1gauss, efermig
-  real(DP):: nvbel,ncbel,efvb,efcb, efgs,dwg(nbnd,nks),scal,temp_tot,kwgt,gaus
+  real(DP):: nvbel,ncbel,efvb,efcb, eflu,efgs,dwg(nbnd,nks),scal,temp_tot,kwgt,gaus
   integer :: homo(nks), lumo(nks)
   logical:: excit
   ! Calculate the Fermi energy ef
@@ -29,6 +29,7 @@ subroutine eh_weights (nks, wk, nbnd, nelec, nholes, ncorex, eg_min, e_excit, de
 
   efgs=efermig (et, nbnd, nks, nelec-ncorex, wk, degauss, ngauss, is, isk)
   efvb=efermig (et, nbnd, nks, nelec-ncorex-nholes, wk, degauss, ngauss, is, isk)
+  eflu=efermig (et, nbnd, nks, nelec-ncorex+nholes, wk, degauss, ngauss, is, isk)
   efcb=efermig (et, nbnd, nks, nelec+nholes, wk, degauss, ngauss, is, isk)
   excit=.false.
   if(e_excit .gt. efcb-efvb) then
@@ -36,7 +37,7 @@ subroutine eh_weights (nks, wk, nbnd, nelec, nholes, ncorex, eg_min, e_excit, de
      efcb=efermig (et, nbnd, nks, nelec, wk, degauss, ngauss, is, isk)
   endif
 
-  write(*,'(A,4f12.6)') "efvb,efgs,ef,efcb=",efvb*13.6056925,efgs*13.6056925,ef*13.6056925,efcb*13.6056925
+  write(*,'(A,5f12.6)') "efvb,efgs,ef,eflu,efcb=",efvb*13.6056925,efgs*13.6056925,ef*13.6056925,eflu*13.6056925,efcb*13.6056925
 
   do  kpoint = 1, nks
      if (is /= 0) then

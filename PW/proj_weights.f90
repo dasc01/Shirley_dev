@@ -1362,7 +1362,7 @@ SUBROUTINE read_band_structure2( dirname, ierr )
   CHARACTER(LEN=*), INTENT(IN)  :: dirname
   INTEGER,          INTENT(OUT) :: ierr
   !
-  INTEGER :: ik, ik_eff, num_k_points, iunout
+  INTEGER :: ik, ik_eff, num_k_points, iunout, unit, ibnd
   LOGICAL :: found, two_fermi_energies_
   LOGICAL , SAVE :: lbs_read = .false.
   !
@@ -1534,6 +1534,18 @@ SUBROUTINE read_band_structure2( dirname, ierr )
   !
   lbs_read = .TRUE.
   !
+  IF ( ionode )  THEN
+     unit = find_free_unit() 
+     OPEN( UNIT = unit,    FILE = 'OccVsE.dat',    STATUS ='UNKNOWN' , FORM = 'FORMATTED')
+     !    
+     DO ik=1,nkstot
+        DO ibnd=1,nbnd
+           write(unit,'(2F16.8)') et_aux(ibnd,ik)*13.60569, wg_aux(ibnd,ik)/wk(ik)
+        ENDDO
+     ENDDO
+     CLOSE(unit)
+  ENDIF
+
   RETURN
   !
 END SUBROUTINE read_band_structure2

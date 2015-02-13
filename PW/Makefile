@@ -91,6 +91,7 @@ gk_sort.o \
 gradcorr.o \
 gweights.o \
 eh_weights.o \
+def_weights.o \
 proj_weights.o \
 g2_kin.o \
 h_epsi_her_apply.o \

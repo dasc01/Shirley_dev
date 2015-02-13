@@ -379,6 +379,7 @@ electrons.o : paw_onecenter.o
 electrons.o : paw_symmetry.o
 electrons.o : pwcom.o
 electrons.o : scf_mod.o
+electrons.o : proj_weights.o 
 eqvect.o : ../Modules/kind.o
 ewald.o : ../Modules/constants.o
 ewald.o : ../Modules/kind.o

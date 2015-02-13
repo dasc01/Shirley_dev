@@ -449,6 +449,7 @@ MODULE input_parameters
         LOGICAL   :: use_psolver = .false.
         LOGICAL   :: scf_psolver = .false.
         LOGICAL   :: eh_scf      = .false.
+        LOGICAL   :: defect_occ  = .false.
         LOGICAL   :: read_extpot = .false.
         LOGICAL   :: read_extwfc = .false.
         LOGICAL   :: read_extocc = .false.
@@ -474,7 +475,7 @@ MODULE input_parameters
              qcutz, q2sigma, lda_plus_U, Hubbard_U, Hubbard_alpha,            &
              edir, emaxpos, eopreg, eamp, smearing, starting_ns_eigenvalue,   &
              U_projection_type, input_dft, la2F, assume_isolated,             &
-             use_psolver, scf_psolver,eh_scf,eg_min,e_excit,nholes,ncorex,&
+             use_psolver, scf_psolver,eh_scf,defect_occ,eg_min,e_excit,nholes,ncorex,&
              read_extpot,read_extwfc,read_extocc,auxprefix, print_esomo, &
 #if defined (EXX)
              x_gamma_extrapolation, nqx1, nqx2, nqx3,                         &

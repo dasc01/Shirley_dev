@@ -28,9 +28,10 @@ SUBROUTINE weights()
   USE mp,                   ONLY : mp_bcast, mp_sum
   USE io_global,            ONLY : ionode, ionode_id
 !DASb
-  USE input_parameters,     ONLY : eh_scf, eg_min, e_excit, nholes, ncorex, read_extwfc, read_extocc, &
+  USE input_parameters,     ONLY : defect_occ, eh_scf, eg_min, e_excit, nholes, ncorex, read_extwfc, read_extocc, &
        &print_esomo
   USE proj_weights,         ONLY : set_proj_weights,set_ext_weights
+  USE constants,            ONLY : rytoev
 !DASe
   !
   IMPLICIT NONE
@@ -42,7 +43,7 @@ SUBROUTINE weights()
     ! counter on bands
   real (DP) demet_up, demet_dw
   !DASb
-  real (DP)::netot
+  real (DP)::netot, elaste
   real (DP),allocatable::eig_tmp(:,:)
   !DASe
   !
@@ -112,7 +113,28 @@ SUBROUTINE weights()
      CALL mp_sum( netot, inter_pool_comm )
      write(*,'(A,F12.6)') "netot=",netot
      !
+  ELSE IF ( defect_occ ) THEN
+     !
+     ! ... calculate weights for the electron-hole case using smearing
+     !
+     if(eg_min .lt. 2*degauss) eg_min=2*degauss
+     netot = 0.0d0
+     CALL def_weights( nks, wk, nbnd, nelec, nspin, nholes, ncorex, eg_min, e_excit, degauss, &
+          ngauss, et, ef, demet, netot, wg, elaste, 0, isk)
+     !
+     CALL mp_sum( demet, inter_pool_comm )
+     !
+     CALL mp_sum( netot, inter_pool_comm )
+     !
+     CALL mp_sum( elaste, inter_pool_comm )
+     !
+     CALL mp_sum( ef, inter_pool_comm )
+     ef=ef/npool
+     write(*,'(A,3F12.6)') "netot, ef, elaste =",netot,ef*rytoev,elaste*rytoev
+     !
   ELSE IF (read_extocc ) THEN
+     !!This reads the weights.dat file obatined from TDDFT runs so that the wavefunctions commensurate with
+     !! TDDFT occupations can be self-consistently calculated at fixed occupancy
      call set_ext_weights( nks, nkstot, wk, nbnd, nelec, degauss, &
           ngauss, et, ef, demet, netot, wg, 0, isk)
 !DASe
@@ -160,6 +182,7 @@ SUBROUTINE weights()
      !
   END IF
   !DASb
+  !!This is commented out as it has been moved to electrons.f90
 !!$  if(read_extocc) call set_ext_weights( nks, nkstot, wk, nbnd, nelec, degauss, &
 !!$       ngauss, et, ef, demet, netot, wg, 0, isk)
 !!$  if(read_extwfc) call set_proj_weights()
@@ -170,7 +193,7 @@ SUBROUTINE weights()
   !
   CALL poolrecover( wg, nbnd, nkstot, nks )
 !DASb
-  if(print_esomo) then
+  if(print_esomo .and. (.not. defect_occ)) then
      if(.not. allocated(eig_tmp)) allocate(eig_tmp(nbnd,nkstot))
      eig_tmp(:,:)=et(:,:)
      CALL poolrecover( eig_tmp, nbnd, nkstot, nks )

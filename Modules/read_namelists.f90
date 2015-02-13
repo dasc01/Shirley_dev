@@ -818,6 +818,7 @@ MODULE read_namelists_module
        CALL mp_bcast( use_psolver,           ionode_id )
        CALL mp_bcast( scf_psolver,           ionode_id )
        CALL mp_bcast( eh_scf,                ionode_id )
+       CALL mp_bcast( defect_occ,                ionode_id )
        CALL mp_bcast( read_extpot,           ionode_id )
        CALL mp_bcast( read_extwfc,           ionode_id )
        CALL mp_bcast( read_extocc,           ionode_id )
